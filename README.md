@@ -6,8 +6,10 @@ WePict is a classroom response system of sorts that allows students to submit dr
 How To
 ------
 * bundle install
-* edit/create config/database.yml, config/app_config.yml, config/initializers/mail.rb
+* Edit/create config/database.yml, config/app_config.yml, and config/private_pub.yml
 * rake db:setup
+ 
+Note that you need the Faye server running in addition to the regular rails server - there's a rackup file that takes care of that.
 
 This can use LDAP and/or a local set of users for authentication.  Users have to exist before they can log in, which means you need to manually create at least 1 user in your database before you can get in.
 
