@@ -1,0 +1,8 @@
+﻿$('#myModal .modal-footer').html('by <%= @user.name %> at <%= nice_datetime @post.updated_at %>');
+$('#myModalLabel').html('<%= @user.name %>');
+box = $("#sig-modal")[0].contentWindow;
+scaleSVG(box,300);
+box.setSignature("<%= @post.data %>");
+$('#sig-modal').css('margin', 'auto')
+
+$('#myModal').modal('show');

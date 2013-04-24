@@ -1,0 +1,114 @@
+@import "twitter/bootstrap/bootstrap";
+@import "twitter/bootstrap/responsive";
+
+// Set the correct sprite paths
+@iconSpritePath: asset-path("twitter/bootstrap/glyphicons-halflings.png");
+@iconWhiteSpritePath: asset-path("twitter/bootstrap/glyphicons-halflings-white.png");
+
+// Set the Font Awesome (Font Awesome is default. You can disable by commenting below lines)
+// Note: If you use asset_path() here, your compiled bootstrap_and_overrides.css will not
+//       have the proper paths. So for now we use the absolute path.
+@fontAwesomeEotPath: asset-path("fontawesome-webfont.eot?v=3.0.2");
+@fontAwesomeEotPath_iefix: asset-path("fontawesome-webfont.eot?#iefix&v=3.0.2");
+@fontAwesomeWoffPath: asset-path("fontawesome-webfont.woff?v=3.0.2");
+@fontAwesomeTtfPath: asset-path("fontawesome-webfont.ttf?v=3.0.2");
+
+// Font Awesome
+@import "fontawesome";
+
+// Glyphicons
+//@import "twitter/bootstrap/sprites.less";
+
+// Your custom LESS stylesheets goes here
+//
+// Since bootstrap was imported above you have access to its mixins which
+// you may use and inherit here
+//
+// If you'd like to override bootstrap's own variables, you can do so here as well
+// See http://twitter.github.com/bootstrap/customize.html#variables for their names and documentation
+//
+// Example:
+// @linkColor: #ff0000;
+
+@import url(http://fonts.googleapis.com/css?family=Permanent+Marker);
+
+.bb-red 				{ color: #ff0000; }
+.bb-orange 			{ color: #ff9200; }
+.bb-yellow 			{ color: #ffd300; }
+.bb-green 			{ color: #00cc00; }
+.bb-blue 				{ color: #0b61a4; }
+.bb-violet 			{ color: #a600a6; }
+
+.brand {
+	font-family: 'Permanent Marker', cursive;
+	float: none !important;
+}
+
+body {
+	padding-top: 60px;
+}
+
+footer {
+	text-align: right;
+	color: #555;
+}
+
+.navbar .nav,
+.navbar .nav > li {
+    *display:inline; /* ie7 fix */
+    *zoom:1; /* hasLayout ie7 trigger */
+    vertical-align: top;
+}
+
+ .navbar-inner {
+    text-align:center;
+}
+
+.main {
+	text-align: center;
+}
+
+.backbox {
+	position: fixed;
+	top: 0.5em;
+	right: 1em;
+	z-index: 9000;
+	padding: 8px;
+}
+
+.input-micro {
+	width: 18px;
+	text-align: center;
+}
+
+.nav-pills > li > a {
+	background-color: #0f61a4;
+	color: white;
+}
+.nav-pills > li > a:hover {
+	background-color: #a600a6;
+}
+
+.page-header {
+	margin-bottom: 20px;
+}
+
+.notebox {
+	background-color: #ececec;
+	color: #000;
+	border: thin solid #eeeeee;
+	width: 70%;
+	padding: 8px;
+	margin: auto;
+	margin-bottom: 10px;
+}
+
+.modal-body {
+	text-align: center;
+}
+
+.promptbox {
+	width: 300px;
+	margin: auto;
+	margin-bottom: 10px;
+}

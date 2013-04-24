@@ -1,0 +1,10 @@
+$("#flashbox").append('<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button>Posted new prompt.</div>');
+
+<% publish_to "/rooms/prompt/#{@room.id}" do %>
+	<% if @room.prompt.empty? %>
+		$('#promptbox').hide('fast');
+	<% else %>
+		$('#promptbox').show('fast');
+		$('#promptbox').html('<%= @room.prompt %>');
+	<% end %>
+<% end %>

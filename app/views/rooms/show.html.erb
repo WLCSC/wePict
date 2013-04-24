@@ -1,0 +1,172 @@
+<div class="page-header">
+	<h1><%= @room.name %></h1>
+</div>
+
+<% if !@room.notes.empty? %>
+	<div class="notebox">
+		<%= @room.notes %>
+	</div>
+<% end %>
+
+<% if can? :write, @room %>
+
+	<% content_for :manage do %>
+		<h3>Manage!</h3>
+		<div class="row">
+			<div class="span3">
+				<h3>Set Prompt</h3>
+				<%= form_tag prompt_room_path(@room), :remote => true do %>
+					<%= text_area_tag :content %><br/>
+					<%= submit_tag "Post Prompt", :class => 'btn btn-large btn-primary' %>
+				<% end %>
+			</div>
+
+			<div class="span3">
+				<%= form_tag display_room_path(@room), :method => :GET do %>
+					<p>
+					Size: <%= number_field_tag 's', 125, :class => 'input-mini', :min => 100, :max => 300, :step => 25 %>, 
+					<%= number_field_tag 'c', 6, :class => 'input-micro', :min => 1, :max => 12, :step => 1 %> X
+					<%= number_field_tag 'r', 5, :class => 'input-micro', :min => 1, :max => 12, :step => 1 %> Grid
+					</p>
+					<%= submit_tag "Start Grid View", :class => 'btn btn-primary' %>
+
+				<% end %>
+
+			</div>
+
+			<div class="span3">
+				<%= link_to "Edit Room", edit_room_path(@room), :class => 'btn btn-large btn-warning' %><br/>
+				<%= link_to "Clear All Posts", clear_room_path(@room), :class => 'btn btn-danger', :remote => true %>
+			</div>
+		</div>
+		<div>
+		</div>
+	<% end %>
+
+<% end %>
+
+<script>
+	function scaleSVG(e, s) {
+		e.document.firstChild.setAttribute("width", s);
+		e.document.firstChild.setAttribute("height", s);
+	}
+</script>
+
+
+<% if can? :post, @room %>
+	<%= subscribe_to "/rooms/prompt/#{@room.id}" %>
+	<% content_for :you do %>
+		<div id="promptbox" class="alert alert-info promptbox" <%= 'style="display: none"' if @room.prompt.empty? %>>
+			<%= @room.prompt %>
+		</div>
+		<iframe src="/signature.svg" height="300" width="300" id="sig" frameBorder="0" style="border: thin solid black;"></iframe>
+		<%= form_tag post_room_path(@room), :id => 'dform', :remote => true do %>
+
+			<%= hidden_field_tag :data, :nil %>
+
+			<p>
+			<a class="btn btn-danger" href="#" onClick="clearSignature()">Clear</a>
+			<%= submit_tag "Submit", :class => 'btn btn-success' %>
+			</p>
+		<% end %>
+
+		<script>
+			var svg = $("#sig")[0].contentWindow;
+			var pathdata = document.getElementById('pathdata');
+
+			function showSignature() {
+				pathdata.textContent = svg.getSignature();
+			}
+
+			function clearSignature() {
+				svg.clearSignature();
+				pathdata.textContent = '';
+			}
+
+			function setSignature(s) {
+				svg.setSignature(s);
+			}
+
+			var myform = document.getElementById('dform');
+			myform.addEventListener('submit', function() { 
+				$("#data").val(svg.getSignature());
+			});
+
+		</script>
+	<% end %>
+
+<% end %>
+
+<% if can? :read, @room %>
+	<%= subscribe_to "/rooms/post/#{@room.id}" %>
+	<% content_for :posts do %>
+		<% if @room.posts.count > 0 %>
+			<table class="table clearfix">
+				<thead>
+					<th>Submitter</th>
+					<th>Submission</th>
+				</thead>
+				<tbody>
+
+					<% @room.posts.each do |post| %>
+						<tr>
+							<td>
+								<p>Created by <%= link_to post.user.name, post.user %>.</p>
+								<p>Last updated <%= nice_datetime(post.updated_at) %>.</p>
+							</td>
+							<td>
+								<iframe src="/signature_show.svg" height="100" width="100" id="sig-<%= post.id %>" rameBorder="0" style="border: thin solid black;"></iframe>
+								<script>
+									$("#sig-<%= post.id %>").load(function() {
+										box = $("#sig-<%= post.id %>")[0].contentWindow;
+										scaleSVG(box,100);
+										box.setSignature("<%= post.data %>");
+									});
+								</script>
+							</td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		<% else %>
+			<p>There doesn't appear to be anything here...</p>
+		<% end %>
+	<% end %>
+<% end %>
+
+<% content_for :users do %>
+	<h3>Managed By</h3>
+	<%= link_to @room.user.name, @room.user %>
+	<h3>Participants</h3>
+	<% if can? :write, @room %>
+		<table class="table table-striped">
+			<% @room.assignments.each do |a| %>
+				<tr>
+					<td width="5%">
+						<%= form_tag unassign_room_path(@room) do %>
+							<%= hidden_field_tag :assignment_id, a.id %>
+							<%= submit_tag raw("&times;"), :class => 'btn btn-danger btn-mini' %>
+						<% end %>
+					</td>
+					<td>
+						<%= link_to a.assignable.display, a.assignable %>
+						<% if a.assignable.is_a? Group %>
+							<%= pills_for a.assignable.users %>
+						<% end %>
+					</td>
+				</tr>
+			<% end %>
+		</table>
+		<%= form_tag assign_room_path(@room) do %>
+			<p><%= text_field_tag "assignment[user_name]", nil, :placeholder => "User", :"data-provide" => 'typeahead', :'data-items' => @all_users.count, :"data-source" => @all_users.to_s, :autocomplete => "off", :class => 'input-small' %>
+			OR
+			<%= text_field_tag "assignment[group_name]", nil, :placeholder => "Group", :"data-provide" => 'typeahead', :'data-items' => @all_groups.count, :"data-source" => @all_groups.to_s, :autocomplete => false, :class => 'input-small' %></p>
+			<%= submit_tag "Add", :class => 'btn btn-primary' %>
+		<% end %>
+	<% else %>
+		<%= pills_for @room.users %>
+	<% end %>
+<% end %>
+
+<%= tabify :you => "Your Post", :posts => 'View Posts', :users => "Users & Groups", :manage => 'Management' %>
+

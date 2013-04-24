@@ -1,0 +1,23 @@
+<div class="page-header">
+  <h1>Rooms</h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Managed By</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @rooms.each do |room| %>
+      <tr>
+				<td><%= link_to room.name, room_path(room) %></td>
+        <td><%= link_to room.user.name, room.user %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% if can? :create, Room %>
+<%= link_to "Add a New Room", new_room_path,  :class => 'btn btn-primary' %>
+<% end %>

@@ -1,0 +1,5 @@
+$("#sig")[0].contentWindow.clearSignature();
+$("#flashbox").append('<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button>Your post has been submitted.</div>');
+<% publish_to "/rooms/post/#{@room.id}" do %>
+	$("#sig-<%= @post.id %>")[0].contentWindow.setSignature("<%= @post.data %>");
+<% end %>

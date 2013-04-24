@@ -1,0 +1,26 @@
+<% if current_user %>
+	<% if current_user.rooms.count > 0 || Room.where(:user_id => current_user.id).count > 0 %>
+		<h2>Rooms You Belong To</h2>
+			<%= current_user.rooms.empty? ? "None right now" : pills_for(current_user.rooms) %>
+		<h2>Rooms You Own</h2>
+			<%= Room.where(:user_id => current_user.id).empty? ? "None right now" : pills_for(Room.where(:user_id => current_user.id)) %>
+	<% else %>
+		<div class="alert">You don't belong to any rooms yet.</div>
+	<% end %>
+<% else %>
+	<div style="margin: auto; width: 260px; text-align: center;">
+   <h2>Log in</h2>  
+      
+    <%= form_tag login_path, :method => :post do %>  
+      <p>  
+        <%= label_tag :username %><br />  
+        <%= text_field_tag :username, params[:username] %>  
+      </p>  
+      <p>  
+        <%= label_tag :password %><br />  
+        <%= password_field_tag :password %>  
+      </p>  
+			<p class="button"><%= submit_tag "Log In", :class => 'btn btn-primary btn-large'%></p>  
+		</div>
+    <% end %>  
+<% end %>
