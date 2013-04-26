@@ -1,7 +1,8 @@
+require 'bcrypt'
 class User < ActiveRecord::Base
 	validates :username, :presence => true
 	attr_accessor :password
-	attr_accessible :name, :email_address, :administrator
+	attr_accessible :name, :email_address, :administrator, :username, :password, :internal
 	before_save :encrypt_password
 	has_many :memberships
 	has_many :groups, :through => :memberships
