@@ -19,3 +19,6 @@
 <p><%= @user.name %> can participate in these rooms: </p>
 <%= pills_for @user.rooms %>
 
+<% if @user.internal && @user != current_user %>
+    <%= link_to "Delete User", @user, :method => :delete, :class => 'btn btn-danger' %>
+<% end %>
