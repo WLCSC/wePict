@@ -19,8 +19,9 @@ class Room < ActiveRecord::Base
 		self.assignments.each do |a|
 			if a.assignable.is_a? User
 				ids << a.assignable.id
-			else
+			elsif a.assignable
 				ids += a.assignable.user_ids
+			else
 			end
 		end
 		User.where(:id => ids)

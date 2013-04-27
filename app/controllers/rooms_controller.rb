@@ -131,10 +131,12 @@ class RoomsController < ApplicationController
 		if @a.save
 			if @a.assignable.is_a? User
 				Post.create(:user_id => @a.assignable.id, :room_id => @room.id, :data => '') unless Post.where(:user_id => @a.assignable.id, :room_id => @room.id).count > 0
-			else
+			elsif @a.assignable
 				@a.assignable.users.each do |u|
 					Post.create(:user_id => u.id, :room_id => @room.id, :data => '') unless Post.where(:user_id => u.id, :room_id => @room.id).count > 0
 				end
+			else
+# Should something go here?
 			end
 			flash[:notice] = "Assigned #{@a.assignable.display} to room."
 			redirect_to @room

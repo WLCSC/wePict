@@ -2,7 +2,7 @@
 	<h1><%= @room.name %></h1>
 </div>
 
-<% if !@room.notes.empty? %>
+<% if @room.notes %>
 	<div class="notebox">
 		<%= @room.notes %>
 	</div>
@@ -56,7 +56,7 @@
 <% if can? :post, @room %>
 	<%= subscribe_to "/rooms/prompt/#{@room.id}" %>
 	<% content_for :you do %>
-		<div id="promptbox" class="alert alert-info promptbox" <%= 'style="display: none"' if @room.prompt.empty? %>>
+		<div id="promptbox" class="alert alert-info promptbox" <%= 'style="display: none"' if @room.prompt %>>
 			<%= @room.prompt %>
 		</div>
 		<iframe src="/signature.svg" height="300" width="300" id="sig" frameBorder="0" style="border: thin solid black;"></iframe>
@@ -141,6 +141,7 @@
 	<% if can? :write, @room %>
 		<table class="table table-striped">
 			<% @room.assignments.each do |a| %>
+				<% if a.assignable %>
 				<tr>
 					<td width="5%">
 						<%= form_tag unassign_room_path(@room) do %>
@@ -155,6 +156,7 @@
 						<% end %>
 					</td>
 				</tr>
+				<% end %>
 			<% end %>
 		</table>
 		<%= form_tag assign_room_path(@room) do %>
@@ -164,7 +166,9 @@
 			<%= submit_tag "Add", :class => 'btn btn-primary' %>
 		<% end %>
 	<% else %>
+		<% if @room.users %>
 		<%= pills_for @room.users %>
+		<% end %>
 	<% end %>
 <% end %>
 
