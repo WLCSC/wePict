@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
 				redirect_to root_path
 			else
 				flash[:alert] = "Invalid login."
-				redirect_to new_session_path 
+				redirect_to sign_in_path 
 			end
 		elsif APP_CONFIG[:auth_local] && user && user.email_address != nil
 			if user.password_hash == BCrypt::Engine.hash_secret(params[:password], user.password_salt)
@@ -25,7 +25,7 @@ class SessionsController < ApplicationController
 				redirect_to root_path
 			else
 				flash[:alert] = "Invalid local login."
-				redirect_to new_session_path
+				redirect_to sign_in_path
 
 			end
 		else
