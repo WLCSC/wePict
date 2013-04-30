@@ -1,9 +1,12 @@
 $("#flashbox").append('<div class="alert alert-info"><button type="button" class="close" data-dismiss="alert">&times;</button>All posts have been cleared.</div>');
 
 setTimeout(function(){
-		$('#flashbox  .alert').hide('fast', function(){ $target.remove(); });
-  }, 5000);
+	$('#flashbox  .alert').hide('fast', function(){ $target.remove(); });
+}, 5000);
 
 <% @room.posts.each do |p| %>
 	$("#sig-<%= p.id %>")[0].contentWindow.setSignature("<%= p.data %>");
+	<% publish_to "/rooms/post/#{@room.id}" do %>
+		$("#sig-<%= p.id %>")[0].contentWindow.setSignature("<%= p.data %>");
+	<% end %>
 <% end %>
