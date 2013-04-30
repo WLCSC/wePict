@@ -68,6 +68,13 @@
 		<!-- Javascripts
 		================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
+<script type="text/javascript">
+$(document).ready(function(){
+  setTimeout(function(){
+		$('#flashbox  .alert').hide('fast', function(){ $target.remove(); });
+  }, 5000);
+ })
+</script>
 
 	</body>
 </html>

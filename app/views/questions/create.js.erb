@@ -1,7 +1,0 @@
-<% if @success %>
-$("#flashbox").append('<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button>Your question has been added.</div>');
-$("#qlist").append('<li id="q<%= @question.id %>">[<%= @question.sequence %>]<%= @question.content %></li>');
-<% else %>
-$("#flashbox").append('<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">&times;</button>Question was not created.</div>');
-
-<% end %>
