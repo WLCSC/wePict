@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
 	has_many :assignments, :as => :assignable
 	has_many :posts
 	has_many :rooms, :through => :posts
+	has_many :managed_rooms, :class_name => "Room"
+	has_many :banks, :through => :managed_rooms
 
 	def encrypt_password
 		if password

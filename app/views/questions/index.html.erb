@@ -1,0 +1,18 @@
+<h1>Questions for <%= @bank.name %></h1>
+
+<table class="table">
+<% @questions.order("sequence ASC").each do |question| %>
+	<tr>
+		<td><%= question.sequence %></td>
+		<td><%= question.content %></td>
+		<td><%= link_to "Post as Prompt", post_room_bank_question_path(@room, @bank, question), :class => 'btn btn-mini btn-success', :id => "qb#{question.id}", :remote => true %></td>
+		<td><%= link_to 'Edit', edit_room_bank_question_path(@room, @bank, question,), :class => 'btn btn-mini btn-warning' %></td>
+		<td><%= link_to 'Destroy', [@room, @bank, question], method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
+  </tr>
+<% end %>
+</table>
+
+
+<%= link_to 'New Question', new_room_bank_question_path(@room, @bank), :class => 'btn btn-primary' %>
+
+<%= link_to "Back to Question Banks", room_banks_path(@room), :class => 'btn btn-inverse' %>

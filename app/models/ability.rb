@@ -16,6 +16,8 @@ class Ability
       cannot :destroy, Room
       cannot :post, Room
       can :post, Room, :id => user.room_ids
+			can :manage, Bank, :room_id => user.room_ids
+			can :manage, Question, :bank_id => user.bank_ids
     end
     #
     # The first argument to `can` is the action you are giving the user 

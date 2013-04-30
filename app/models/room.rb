@@ -5,6 +5,7 @@ class Room < ActiveRecord::Base
 	has_many :assignments
 	belongs_to :user
 	has_many :posts
+	has_many :banks
 
 	def set_user
 		self.user = User.where(:name => self.user_name).first

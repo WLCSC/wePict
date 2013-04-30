@@ -1,4 +1,5 @@
 Wepict::Application.routes.draw do
+
   resources :rooms do
 		member do
 			get 'post'
@@ -10,6 +11,13 @@ Wepict::Application.routes.draw do
 			get 'clear'
 			get 'modal'
 			post "prompt"
+		end
+  	resources :banks do
+			resources :questions do
+				member do
+					get 'post'
+				end
+			end
 		end
  	end
   

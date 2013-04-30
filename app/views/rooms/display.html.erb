@@ -7,6 +7,14 @@
 
 <%= subscribe_to "/rooms/post/#{@room.id}" %>
 
+<% if params[:prompt] %>
+<%= subscribe_to "/rooms/prompt/#{@room.id}" %>
+
+<div id="promptbox" class="alert alert-info promptbox" <%= 'style="display: none"' if @room.prompt && !@room.prompt.empty? %>>
+	<%= @room.prompt %>
+</div>
+<% end %>
+
 <% @posts.each do |row| %>
 	<div class="row-fluid">
 		<% row.each do |post| %>

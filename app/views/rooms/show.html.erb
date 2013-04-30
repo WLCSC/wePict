@@ -27,6 +27,9 @@
 					<%= number_field_tag 'c', 6, :class => 'input-micro', :min => 1, :max => 12, :step => 1 %> X
 					<%= number_field_tag 'r', 5, :class => 'input-micro', :min => 1, :max => 12, :step => 1 %> Grid
 					</p>
+					<p>
+						<%= check_box_tag 'prompt' %> Show Prompt?
+					</p>
 					<%= submit_tag "Start Grid View", :class => 'btn btn-primary' %>
 
 				<% end %>
@@ -35,6 +38,7 @@
 
 			<div class="span3">
 				<%= link_to "Edit Room", edit_room_path(@room), :class => 'btn btn-large btn-warning' %><br/>
+				<%= link_to "Question Banks", room_banks_path(@room), :class => 'btn btn-large btn-inverse' %>
 				<%= link_to "Clear All Posts", clear_room_path(@room), :class => 'btn btn-danger', :remote => true %>
 			</div>
 		</div>

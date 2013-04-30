@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130424192546) do
+ActiveRecord::Schema.define(:version => 20130430175954) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "assignable_id"
@@ -19,6 +19,14 @@ ActiveRecord::Schema.define(:version => 20130424192546) do
     t.integer  "room_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+  end
+
+  create_table "banks", :force => true do |t|
+    t.integer  "room_id"
+    t.string   "name"
+    t.text     "notes"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "groups", :force => true do |t|
@@ -41,6 +49,14 @@ ActiveRecord::Schema.define(:version => 20130424192546) do
     t.integer  "user_id"
     t.integer  "room_id"
     t.text     "data"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "questions", :force => true do |t|
+    t.integer  "bank_id"
+    t.string   "content"
+    t.integer  "sequence"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
