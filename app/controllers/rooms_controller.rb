@@ -146,7 +146,7 @@ class RoomsController < ApplicationController
 
 	def unassign
 		@room = Room.find(params[:id])
-		authorize :update, @room
+		authorize! :update, @room
 		@a = @room.assignments.find(params[:assignment_id])
 		posts = []
 		if @a.assignable.is_a? User

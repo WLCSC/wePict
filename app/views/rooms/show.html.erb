@@ -56,7 +56,7 @@
 <% if can? :post, @room %>
 	<%= subscribe_to "/rooms/prompt/#{@room.id}" %>
 	<% content_for :you do %>
-		<div id="promptbox" class="alert alert-info promptbox" <%= 'style="display: none"' if @room.prompt.empty? %>>
+		<div id="promptbox" class="alert alert-info promptbox" <%= 'style="display: none"' if (@room.prompt == nil || @room.prompt.empty?)  %>>
 			<%= @room.prompt %>
 		</div>
 		<iframe src="/signature.svg" height="300" width="300" id="sig" frameBorder="0" style="border: thin solid black;"></iframe>
