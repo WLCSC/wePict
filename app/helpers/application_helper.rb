@@ -9,7 +9,7 @@ module ApplicationHelper
 	end
 
 	def tabify list
-		r = '<ul class="nav nav-tabs">'
+		r = '<ul class="custom nav nav-tabs">'
 		active = true
 		list.each_pair do |li, str|
 			if content_for? li

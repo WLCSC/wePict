@@ -16,3 +16,5 @@ config/*.yml
 rerun.txt
 pickle-email-*.html
 .lockfile
+*.swp
+*.patch
