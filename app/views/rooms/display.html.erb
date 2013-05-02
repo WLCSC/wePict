@@ -5,6 +5,18 @@
 	}
 </script>
 
+<% if params[:sounds] %>
+	<%= javascript_tag do %>
+		function beep() {$.playSound("/beep.mp3");};
+		function doubleBeep() {$.playSound("/double.mp3");};
+	<% end %>
+<% else %>
+	<%= javascript_tag do %>
+		function beep() {};
+		function doubleBeep() {};
+	<% end %>
+<% end %>
+
 <%= subscribe_to "/rooms/post/#{@room.id}" %>
 
 <% if params[:prompt] %>

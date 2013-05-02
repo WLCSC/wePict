@@ -8,5 +8,6 @@ setTimeout(function(){
 	$("#sig-<%= p.id %>")[0].contentWindow.setSignature("<%= p.data %>");
 	<% publish_to "/rooms/post/#{@room.id}" do %>
 		$("#sig-<%= p.id %>")[0].contentWindow.setSignature("<%= p.data %>");
+		beep();
 	<% end %>
 <% end %>
