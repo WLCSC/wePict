@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+  <rect id="r" width="300" height="300" fill="#eee"/>
+  <path id="p" stroke="black" stroke-width="2" fill="none" pointer-events="none"/>
+  <script>
+    var r = document.getElementById('r'),
+        p = document.getElementById('p'),
+        signaturePath = '',
+        isDown = false;
+
+    function clearSignature() {
+      signaturePath = '';
+      p.setAttribute('d', '');
+    }
+
+    function getSignature() {
+      return signaturePath;
+    }
+	
+	function setSignature(s) {
+		signaturePath = s;
+		p.setAttribute('d', signaturePath);
+	}
+  </script>
+</svg>

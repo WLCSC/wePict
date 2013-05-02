@@ -4,7 +4,7 @@ class BanksController < ApplicationController
   def index
 		@room = Room.find(params[:room_id])
     @banks = @room.banks
-		authorize! :index, @banks
+		authorize! :manage, @room
 
     respond_to do |format|
       format.html # index.html.erb
