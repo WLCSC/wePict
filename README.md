@@ -11,7 +11,9 @@ How To
  
 Note that you need the Faye server running in addition to the regular rails server - there's a rackup file that takes care of that.
 
-This can use LDAP and/or a local set of users for authentication.  Users have to exist before they can log in, which means you need to manually create at least 1 user in your database before you can get in.
+    rackup private_pub.ru -s thin -E production
+
+This can use LDAP and/or a local set of users for authentication.  LDAP users get automatically created the first time they log in.  There's a rake task to create an initial local user if you need one as well (rake adduser).
 
     WePict is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
