@@ -1,8 +1,10 @@
 require 'bcrypt'
 class User < ActiveRecord::Base
 	validates :username, :presence => true
-	attr_accessor :password
-	attr_accessible :name, :email_address, :administrator, :username, :password, :internal
+	validates :password, :confirmation => true
+	validate :internal_user_cannot_have_password
+	attr_accessor :password, :password_confirmation
+	attr_accessible :name, :email_address, :administrator, :username, :password, :password_confirmation, :internal
 	before_save :encrypt_password
 	has_many :memberships
 	has_many :groups, :through => :memberships
@@ -11,6 +13,12 @@ class User < ActiveRecord::Base
 	has_many :rooms, :through => :posts
 	has_many :managed_rooms, :class_name => "Room"
 	has_many :banks, :through => :managed_rooms
+
+	def internal_user_cannot_have_password
+		if password && internal
+			errors.add(:base, "An LDAP user can't have a password in the database")
+		end
+	end
 
 	def encrypt_password
 		if password
