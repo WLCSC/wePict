@@ -5,8 +5,10 @@ setTimeout(function(){
 <% publish_to "/rooms/prompt/#{@room.id}" do %>
 	<% if @room.prompt.empty? %>
 		$('#promptbox').hide('fast');
+		doubleBeep();
 	<% else %>
 		$('#promptbox').show('fast');
 		$('#promptbox').html('<%= @room.prompt %>');
+		doubleBeep();
 	<% end %>
 <% end %>

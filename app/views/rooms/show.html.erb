@@ -28,7 +28,8 @@
 					<%= number_field_tag 'r', 5, :class => 'input-micro', :min => 1, :max => 12, :step => 1 %> Grid
 					</p>
 					<p>
-						<%= check_box_tag 'prompt' %> Show Prompt?
+					<%= check_box_tag 'prompt' %> Show Prompt?<br/>
+						<%= check_box_tag 'sounds' %> Play Sounds?
 					</p>
 					<%= submit_tag "Start Grid View", :class => 'btn btn-primary' %>
 
