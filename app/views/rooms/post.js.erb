@@ -5,7 +5,7 @@ setTimeout(function(){
 		$('#flashbox  .alert').hide('fast', function(){ $target.remove(); });
   }, 5000);
 
-<% publish_to "/rooms/post/#{@room.id}" do %>
+<% publish_to "/wepict/rooms/post/#{@room.id}" do %>
 	$("#sig-<%= @post.id %>")[0].contentWindow.setSignature("<%= @post.data %>");
 	beep();
 <% end %>

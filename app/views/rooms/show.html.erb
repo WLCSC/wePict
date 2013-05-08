@@ -58,12 +58,12 @@
 
 
 <% if can? :post, @room %>
-	<%= subscribe_to "/rooms/prompt/#{@room.id}" %>
+	<%= subscribe_to "/wepict/rooms/prompt/#{@room.id}" %>
 	<% content_for :you do %>
 		<div id="promptbox" class="alert alert-info promptbox" <%= 'style="display: none"' if @room.prompt && !@room.prompt.empty? %>>
 			<%= @room.prompt %>
 		</div>
-		<iframe src="/signature.svg" height="300" width="300" id="sig" frameBorder="0" style="border: thin solid black;"></iframe>
+		<iframe src="<%= root_path %>signature.svg" height="300" width="300" id="sig" frameBorder="0" style="border: thin solid black;"></iframe>
 		<%= form_tag post_room_path(@room), :id => 'dform', :remote => true do %>
 
 			<%= hidden_field_tag :data, :nil %>
@@ -102,7 +102,7 @@
 <% end %>
 
 <% if can? :read, @room %>
-	<%= subscribe_to "/rooms/post/#{@room.id}" %>
+	<%= subscribe_to "/wepict/rooms/post/#{@room.id}" %>
 	<% content_for :posts do %>
 		<% if @room.posts.count > 0 %>
 			<table class="table clearfix">
@@ -119,7 +119,7 @@
 								<p>Last updated <%= nice_datetime(post.updated_at) %>.</p>
 							</td>
 							<td>
-								<iframe src="/signature_show.svg" height="100" width="100" id="sig-<%= post.id %>" rameBorder="0" style="border: thin solid black;"></iframe>
+								<iframe src="<%= root_path %>signature_show.svg" height="100" width="100" id="sig-<%= post.id %>" rameBorder="0" style="border: thin solid black;"></iframe>
 								<script>
 									$("#sig-<%= post.id %>").load(function() {
 										box = $("#sig-<%= post.id %>")[0].contentWindow;

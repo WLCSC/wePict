@@ -17,10 +17,10 @@
 	<% end %>
 <% end %>
 
-<%= subscribe_to "/rooms/post/#{@room.id}" %>
+<%= subscribe_to "/wepict/rooms/post/#{@room.id}" %>
 
 <% if params[:prompt] %>
-<%= subscribe_to "/rooms/prompt/#{@room.id}" %>
+<%= subscribe_to "/wepict/rooms/prompt/#{@room.id}" %>
 
 <div id="promptbox" class="alert alert-info promptbox" <%= 'style="display: none"' if @room.prompt && !@room.prompt.empty? %>>
 	<%= @room.prompt %>
@@ -33,7 +33,7 @@
 			<div class="span<%= (12.0 / @cols).ceil  %>">
 				<% if post %>
 					<div class="well" style="text-align: center;">
-						<iframe src="/signature_show.svg" height="<%= @scaleTo %>" width="<%= @scaleTo %>" id="sig-<%= post.id %>" frameBorder="0" style="border: none; margin: auto;"></iframe>
+						<iframe src="<%= root_path %>signature_show.svg" height="<%= @scaleTo %>" width="<%= @scaleTo %>" id="sig-<%= post.id %>" frameBorder="0" style="border: none; margin: auto;"></iframe>
 						<script>
 							$("#sig-<%= post.id %>").load(function() {
 								box = $("#sig-<%= post.id %>")[0].contentWindow;

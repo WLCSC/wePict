@@ -6,7 +6,7 @@ setTimeout(function(){
 
 <% @room.posts.each do |p| %>
 	$("#sig-<%= p.id %>")[0].contentWindow.setSignature("<%= p.data %>");
-	<% publish_to "/rooms/post/#{@room.id}" do %>
+	<% publish_to "/wepict/rooms/post/#{@room.id}" do %>
 		$("#sig-<%= p.id %>")[0].contentWindow.setSignature("<%= p.data %>");
 		beep();
 	<% end %>

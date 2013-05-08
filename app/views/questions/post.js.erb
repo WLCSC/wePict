@@ -7,7 +7,7 @@ setTimeout(function(){
 		$('#flashbox  .alert').hide('fast', function(){ $target.remove(); });
 }, 5000);
 
-<% publish_to "/rooms/prompt/#{@room.id}" do %>
+<% publish_to "/wepict/rooms/prompt/#{@room.id}" do %>
 	<% if @room.prompt.empty? %>
 		$('#promptbox').hide('fast');
 	<% else %>
