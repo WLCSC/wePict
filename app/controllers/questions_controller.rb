@@ -31,7 +31,7 @@ class QuestionsController < ApplicationController
 		@room = Room.find(params[:room_id])
 		@bank = @room.banks.find(params[:bank_id])
 		@question = @bank.questions.build 
-		@question.sequence = @bank.questions.maximum(:sequence) + 1
+		@question.sequence = (@bank.questions.maximum(:sequence) || 0) + 1
 
 		respond_to do |format|
 			format.html # new.html.erb
