@@ -18,6 +18,7 @@ class Ability
       can :post, Room, :id => user.room_ids
 			can :manage, Bank
 			can :manage, Bank, :room_id => user.room_ids
+			can :create, Question
 			can :manage, Question, :bank_id => user.bank_ids
     end
     #

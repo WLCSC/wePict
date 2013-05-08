@@ -31,6 +31,7 @@ class QuestionsController < ApplicationController
 		@room = Room.find(params[:room_id])
 		@bank = @room.banks.find(params[:bank_id])
 		@question = @bank.questions.build 
+		@question.sequence = @bank.questions.maximum(:sequence) + 1
 
 		respond_to do |format|
 			format.html # new.html.erb
@@ -56,7 +57,7 @@ class QuestionsController < ApplicationController
 			@success = @question.save	
 		else
 				if @question.save
-					redirect_to [@room, @bank, @question], notice: 'Question was successfully created.' 
+					redirect_to room_bank_questions_path(@room, @bank), notice: 'Question was successfully created.' 
 				else
 					render action: "new"
 			end
