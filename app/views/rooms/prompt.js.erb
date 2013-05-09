@@ -8,7 +8,7 @@ setTimeout(function(){
 		doubleBeep();
 	<% else %>
 		$('#promptbox').show('fast');
-		$('#promptbox').html('<%= @room.prompt %>');
+		$('#promptbox').html('<%= markdown @room.prompt %>');
 		doubleBeep();
 	<% end %>
 <% end %>

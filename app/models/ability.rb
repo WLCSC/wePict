@@ -8,14 +8,14 @@ class Ability
     if user.admin?
       can :manage, :all
       cannot :post, Room
-      can :post, Room, :id => user.room_ids
+      can :post, Room, :id => user.room_ids, :open => true
     else
       can :index, Room
       can [:read, :post], Room, :id => user.room_ids
       can :manage, Room, :user_id => user.id
       cannot :destroy, Room
       cannot :post, Room
-      can :post, Room, :id => user.room_ids
+      can :post, Room, :id => user.room_ids, :open => true
 			can :manage, Bank
 			can :manage, Bank, :room_id => user.room_ids
 			can :create, Question

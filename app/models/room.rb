@@ -12,7 +12,7 @@ class Room < ActiveRecord::Base
 	end
 
 	def display
-		self.name
+		((self.open ? '' : '<i class="icon-ban-circle"></i>') + self.name).html_safe
 	end
 
 	def users

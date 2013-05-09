@@ -1,5 +1,9 @@
 <div class="page-header">
-	<h1><%= @room.name %></h1>
+	<% if @room.open %>
+		<h1><%= @room.name %></h1>
+	<% else %>
+		<h1 style="color: #ba2222;"><i class="icon-ban-circle"></i> <%= @room.name %> <i class="icon-ban-circle"></i></h1>
+	<% end %>
 </div>
 
 <% if @room.notes && !@room.notes.empty? %>
@@ -22,10 +26,13 @@
 
 			<div class="span3">
 				<%= form_tag display_room_path(@room), :method => :GET do %>
-					<p>
-					Size: <%= select_tag 's', options_for_select("Tiny" => 96, "Small" => 150, "Medium" => 200, "Large" => 250, "Giant" => 300), :class => 'input-small'%><br/> 
+					<p style="margin-bottom: 2px;">
+					Image Size: <%= select_tag 's', options_for_select("Tiny" => 96, "Small" => 150, "Medium" => 200, "Large" => 250, "Giant" => 300), :class => 'input-small'%><br/> 
 					<%= number_field_tag 'c', 6, :class => 'input-micro', :min => 1, :max => 12, :step => 1 %> X
 					<%= number_field_tag 'r', 5, :class => 'input-micro', :min => 1, :max => 12, :step => 1 %> Grid
+					</p>
+					<p style="font-style: italic; font-size: 10px; margin-top: 2px; line-height: 12px;">
+					Note that if your image size is too large, it will overflow over the edges of the grid.  Some experimentation may be necessary to find the optimal set up for your screen.
 					</p>
 					<p>
 					<%= check_box_tag 'prompt' %> Show Prompt?<br/>
@@ -38,9 +45,14 @@
 			</div>
 
 			<div class="span3">
-				<%= link_to "Edit Room", edit_room_path(@room), :class => 'btn btn-large btn-warning' %><br/>
-				<%= link_to "Question Banks", room_banks_path(@room), :class => 'btn btn-large btn-inverse' %>
-				<%= link_to "Clear All Posts", clear_room_path(@room), :class => 'btn btn-danger', :remote => true %>
+				<%= link_to "Edit Room", edit_room_path(@room), :class => 'btn btn-large btn-warning' %><br/><br/>
+				<%= link_to "Question Banks", room_banks_path(@room), :class => 'btn btn-large btn-inverse' %><br/><br/>
+				<%= link_to "Clear All Posts", clear_room_path(@room), :class => 'btn btn-danger', :remote => true %><br/><br/>
+				<% if @room.open %>
+					<%= link_to "Lock Room", lock_room_path(@room), :class => 'btn btn-warning'%>
+				<% else %>
+					<%= link_to "Unlock Room", unlock_room_path(@room), :class => 'btn btn-primary'%>
+				<% end %>
 			</div>
 		</div>
 		<div>
@@ -61,7 +73,7 @@
 	<%= subscribe_to "/wepict/rooms/prompt/#{@room.id}" %>
 	<% content_for :you do %>
 		<div id="promptbox" class="alert alert-info promptbox" <%= 'style="display: none"' if @room.prompt && !@room.prompt.empty? %>>
-			<%= @room.prompt %>
+			<%= markdown @room.prompt %>
 		</div>
 		<iframe src="<%= root_path %>signature.svg" height="300" width="300" id="sig" frameBorder="0" style="border: thin solid black;"></iframe>
 		<%= form_tag post_room_path(@room), :id => 'dform', :remote => true do %>
@@ -176,5 +188,5 @@
 	<% end %>
 <% end %>
 
-<%= tabify :you => "Your Post", :posts => 'View Posts', :users => "Users & Groups", :manage => 'Management' %>
+<%= tabify :manage => 'Management', :you => "Your Post", :posts => 'View Posts', :users => "Users & Groups" %>
 

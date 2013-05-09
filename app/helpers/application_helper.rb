@@ -102,7 +102,11 @@ module ApplicationHelper
 	def pills_for collection, klass = nil
 		buffer = '<ul class="nav nav-pills ' + (klass ? klass : '') + '">' + "\n"
 		collection.each do |item|
-			buffer << '<li>' + link_to(item.display, item) + '</li>' + "\n"
+			if item.is_a?(Room) && !item.open
+				buffer << '<li>' + link_to(item.display, (can?(:update, item) ? item : "#" ), :class => 'closedRoom') + '</li>' + "\n"
+			else
+				buffer << '<li>' + link_to(item.display, item) + '</li>' + "\n"
+			end
 		end
 		buffer << '</ul>'
 		buffer.html_safe

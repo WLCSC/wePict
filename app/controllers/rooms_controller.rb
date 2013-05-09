@@ -178,4 +178,20 @@ class RoomsController < ApplicationController
 		@room.prompt = params[:content]
 		@room.save
 	end
+
+	def lock
+		@room = Room.find(params[:id])
+		authorize! :update, @room
+		@room.open = false
+		@room.save
+		redirect_to @room, :notice => 'Locked room.'
+	end
+
+	def unlock
+		@room = Room.find(params[:id])
+		authorize! :update, @room
+		@room.open = true
+		@room.save
+		redirect_to @room, :notice => 'Unlocked room'
+	end
 end

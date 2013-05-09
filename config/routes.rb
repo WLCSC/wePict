@@ -11,6 +11,8 @@ Wepict::Application.routes.draw do
 			get 'clear'
 			get 'modal'
 			post "prompt"
+			get 'lock'
+			get 'unlock'
 		end
   	resources :banks do
 			resources :questions do

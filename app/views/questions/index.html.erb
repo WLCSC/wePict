@@ -4,7 +4,7 @@
 <% @questions.order("sequence ASC").each do |question| %>
 	<tr>
 		<td><%= question.sequence %></td>
-		<td><%= question.content %>
+		<td><%= markdown question.content %>
 			<% if question.notes != nil && !question.notes.empty? %>
 				<p class="qnote"><%= question.notes %></p>
 			<% end %>

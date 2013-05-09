@@ -2,7 +2,7 @@
   <%= f.error_notification %>
 
 	<div class="form-inputs">
-		<%= f.input :content %>
+		<%= f.input :content, :as => :text, :input_html => {:rows => 4} %>
 		<%= f.input :notes, input_html: {:rows => '4'} %>
 		<%= f.input :sequence %>
   </div>
