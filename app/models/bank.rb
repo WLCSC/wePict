@@ -4,12 +4,17 @@ class Bank < ActiveRecord::Base
 	belongs_to :room
 
 	def copy target
-		bank = Bank.new(self.attributes.merge(:room_id => target.id))
+		bank = self.dup
+		bank.room_id = target.id
 		if bank.save
 		self.questions.each do |q|
-			Question.create(q.attributes.merge(:bank_id => bank.id))
+			q2 = q.dup
+			q2.bank_id = bank.id
+			q2.save
 		end
+		true
+		else
+			false
 		end
-		redirect_to [target, bank], :notice => "Successfully copied question bank."
 	end
 end

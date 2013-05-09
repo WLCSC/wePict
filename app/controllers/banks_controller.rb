@@ -82,7 +82,18 @@ class BanksController < ApplicationController
     @bank.destroy
 
     respond_to do |format|
-      format.html { redirect_to room_banks_url(@room) }
+      format.html { redirect_to room_banks_url(@room), :notice => 'Removed question bank.' }
     end
   end
+
+	def copy
+		@room = Room.find(params[:room_id])
+    @bank = @room.banks.find(params[:id])
+		@target = Room.find(params[:target])
+		authorize! :update, @bank
+		authorize! :update, @target
+
+		@bank.copy(@target)
+		redirect_to room_banks_path(@target), :notice => "Successfully copied question bank."
+	end
 end

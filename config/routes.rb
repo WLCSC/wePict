@@ -15,6 +15,7 @@ Wepict::Application.routes.draw do
 			get 'unlock'
 		end
   	resources :banks do
+			post 'copy', :on => :member
 			resources :questions do
 				member do
 					get 'post'
