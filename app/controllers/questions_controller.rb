@@ -67,6 +67,8 @@ class QuestionsController < ApplicationController
 	# PUT /questions/1
 	# PUT /questions/1.json
 	def update
+		@room = Room.find(params[:room_id])
+		@bank = @room.banks.find(params[:bank_id])
 		@question = Question.find(params[:id])
 
 		respond_to do |format|
@@ -83,11 +85,13 @@ class QuestionsController < ApplicationController
 	# DELETE /questions/1
 	# DELETE /questions/1.json
 	def destroy
+		@room = Room.find(params[:room_id])
+		@bank = @room.banks.find(params[:bank_id])
 		@question = Question.find(params[:id])
 		@question.destroy
 
 		respond_to do |format|
-			format.html { redirect_to questions_url }
+			format.html { redirect_to room_bank_questions_path(@room, @bank), :notice => "Question was successfully destroyed." }
 			format.json { head :no_content }
 		end
 	end
