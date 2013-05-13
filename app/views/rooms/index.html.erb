@@ -11,7 +11,7 @@
   <tbody>
     <% @rooms.each do |room| %>
       <tr>
-				<td><%= link_to room.name, room_path(room) %></td>
+				<td><%= room.open ? '' : '<span style="color: #ba2222;"><i class="icon-ban-circle"></i></span>'.html_safe %><%= can?(:read, room) ? link_to(room.name, room_path(room)) : room.name %></td>
         <td><%= link_to room.user.name, room.user %></td>
       </tr>
     <% end %>
