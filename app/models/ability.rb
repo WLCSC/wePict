@@ -12,6 +12,9 @@ class Ability
     else
       can :index, Room
       can [:read, :post], Room, :id => user.room_ids
+			can [:read, :post], Room do |room|
+				room.users.include? user
+			end
       can :manage, Room, :user_id => user.id
       cannot :destroy, Room
       cannot :post, Room

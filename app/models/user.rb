@@ -38,4 +38,8 @@ class User < ActiveRecord::Base
 	def display 
 		self.name
 	end
+
+	def rooms
+		Room.all.keep_if{|r| r.users.include? self}
+	end
 end

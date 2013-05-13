@@ -8,7 +8,9 @@ class Room < ActiveRecord::Base
 	has_many :banks
 
 	def set_user
+		if self.user_name
 		self.user = User.where(:name => self.user_name).first
+		end
 	end
 
 	def display

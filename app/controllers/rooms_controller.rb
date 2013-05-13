@@ -194,4 +194,13 @@ class RoomsController < ApplicationController
 		@room.save
 		redirect_to @room, :notice => 'Unlocked room'
 	end
+
+	def rebuild
+		@room = Room.find(params[:id])
+		authorize! :update, @room
+		@room.posts.all.each{ |p| p.delete}
+
+		@room.users.each{|u| Post.create(:user_id => u.id, :room_id => @room.id, :data => '') }
+		redirect_to @room, :notice => "Rebuilt membership for #{@room.users.count} users."
+	end
 end

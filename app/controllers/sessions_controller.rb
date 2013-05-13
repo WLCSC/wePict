@@ -32,6 +32,12 @@ class SessionsController < ApplicationController
 			flash[:alert] = "You are not allowed to log in."
 			redirect_to root_path
 		end
+
+		Room.all.each do |r|
+			if r.users.include? self
+				Post.create(:user_id => self.id, :room_id => r.id, :data => '') unless Post.where(:user_id => self.id, :room_id => r.id).count > 0
+			end
+		end
 		
 	end
 

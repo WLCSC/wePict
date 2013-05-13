@@ -38,26 +38,40 @@
 					<%= check_box_tag 'prompt' %> Show Prompt?<br/>
 						<%= check_box_tag 'sounds' %> Play Sounds?
 					</p>
-					<%= submit_tag "Start Grid View", :class => 'btn btn-primary' %>
+					<%= submit_tag "Start Grid View", :class => 'btn btn-primary btn-large' %>
 
 				<% end %>
 
 			</div>
 
 			<div class="span3">
-				<%= link_to "Edit Room", edit_room_path(@room), :class => 'btn btn-large btn-warning' %><br/><br/>
-				<%= link_to "Question Banks", room_banks_path(@room), :class => 'btn btn-large btn-inverse' %><br/><br/>
-				<%= link_to "Clear All Posts", clear_room_path(@room), :class => 'btn btn-danger', :remote => true %><br/><br/>
+				<p>
 				<% if @room.open %>
-					<%= link_to "Lock Room", lock_room_path(@room), :class => 'btn btn-warning'%><br/>
+					<%= link_to "#{i 'lock'} Lock Room".html_safe, lock_room_path(@room), :class => 'btn btn-danger btn-large'%>
 				<% else %>
-					<%= link_to "Unlock Room", unlock_room_path(@room), :class => 'btn btn-primary'%><br/>
+					<%= link_to "#{i 'unlock'} Unlock Room".html_safe, unlock_room_path(@room), :class => 'btn btn-success btn-large'%>
 				<% end %>
+				</p>
 
-				<% if current_user.admin? %>
-					<br/>
-					<p><%= link_to "Delete Room!", room_path(@room), :method => 'delete', :class => 'btn btn-danger btn-mini', :style => 'font-weight: bold', :confirm => "Really delete #{@room.name}?" %></p>
+				<p>
+				<%= link_to "Question Banks", room_banks_path(@room), :class => 'btn btn-large btn-primary' %>
+				</p>
+
+				<p>
+				<%= link_to "Clear All Posts", clear_room_path(@room), :class => 'btn btn-warning btn-mini', :remote => true, :confirm => "Really clear all posts?" %>
+				<% if @room.users.count != @room.posts.count %>
+					<%= link_to "!! Rebuild Membership !!", rebuild_room_path(@room), :class => 'btn btn-danger btn-large', :style => 'font-weight: bold;', :confirm => "WARNING: This will clear all existing posts.  Continue?"%>
+				<% else %>
+					<%= link_to "Rebuild Membership", rebuild_room_path(@room), :class => 'btn btn-inverse btn-mini', :confirm => 'WARNING: This will clear all existing posts.  Continue?' %>
 				<% end %>
+				</p>
+				
+				<p>
+				<%= link_to "Edit Room", edit_room_path(@room), :class => 'btn btn-mini btn-warning' %>
+				<% if current_user.admin? %>
+					<%= link_to "Delete Room!", room_path(@room), :method => 'delete', :class => 'btn btn-danger btn-mini', :style => 'font-weight: bold', :confirm => "Really delete #{@room.name}?" %>
+				<% end %>
+				<p>
 			</div>
 		</div>
 		<div>
@@ -188,7 +202,9 @@
 		<% end %>
 	<% else %>
 		<% if @room.users %>
-		<%= pills_for @room.users %>
+			<%= pills_for @room.users %>
+		<% else %>
+			<p>There's nobody here...</p>
 		<% end %>
 	<% end %>
 <% end %>
