@@ -49,9 +49,14 @@
 				<%= link_to "Question Banks", room_banks_path(@room), :class => 'btn btn-large btn-inverse' %><br/><br/>
 				<%= link_to "Clear All Posts", clear_room_path(@room), :class => 'btn btn-danger', :remote => true %><br/><br/>
 				<% if @room.open %>
-					<%= link_to "Lock Room", lock_room_path(@room), :class => 'btn btn-warning'%>
+					<%= link_to "Lock Room", lock_room_path(@room), :class => 'btn btn-warning'%><br/>
 				<% else %>
-					<%= link_to "Unlock Room", unlock_room_path(@room), :class => 'btn btn-primary'%>
+					<%= link_to "Unlock Room", unlock_room_path(@room), :class => 'btn btn-primary'%><br/>
+				<% end %>
+
+				<% if current_user.admin? %>
+					<br/>
+					<p><%= link_to "Delete Room!", room_path(@room), :method => 'delete', :class => 'btn btn-danger btn-mini', :style => 'font-weight: bold', :confirm => "Really delete #{@room.name}?" %></p>
 				<% end %>
 			</div>
 		</div>
