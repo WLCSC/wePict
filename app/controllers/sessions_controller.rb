@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
 	end
 
 	def create
-		user = User.where(:username => params[:username]).first
+		user = User.where(:username => params[:username].downcase!).first
 		if APP_CONFIG[:auth_ldap] 
 			lgi = ldap_login(params[:username], params[:password])
 			if lgi && lgi.length > 0
