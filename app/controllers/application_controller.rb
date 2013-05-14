@@ -23,4 +23,8 @@ class ApplicationController < ActionController::Base
     redirect_to root_path unless current_user && current_user.admin?
   end
 
+	rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_url, :alert => exception.message
+  end
+	
 end
