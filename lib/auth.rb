@@ -5,6 +5,9 @@ SimpleLdapAuthenticator.logger = Rails.logger
 SimpleLdapAuthenticator.use_ssl = true
 
 def ldap_login user,pass
+	if user.empty? || pass.empty?
+		false
+	end
 	if l = SimpleLdapAuthenticator.valid?(user,pass)
 		l
 	else

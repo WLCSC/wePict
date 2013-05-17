@@ -40,7 +40,6 @@
       isDown = false; 
 
       if (isTouchEvent(e)) e.preventDefault();
-			dataField.val(getSignature());
     }
 
     r.addEventListener('mousedown', down, false);

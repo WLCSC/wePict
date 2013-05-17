@@ -69,6 +69,9 @@
 				<% end %>
 				</p>
 				
+				<p><%= link_to "Pop Out Control Window", '#', :class => 'btn btn-info', :onclick => "javascript:window.open('#{control_room_url(@room)}','popup','width=400,height=200');" %>
+				</p>
+
 				<p>
 				<%= link_to "Edit Room", edit_room_path(@room), :class => 'btn btn-mini btn-warning' %>
 				<% if current_user.admin? %>

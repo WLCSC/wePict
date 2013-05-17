@@ -2,7 +2,7 @@ class RoomsController < ApplicationController
   # GET /rooms
   # GET /rooms.json
   def index
-    @rooms = Room.accessible_by(current_ability)
+    @rooms = Room.all 
 
     respond_to do |format|
       format.html # index.html.erb
@@ -202,5 +202,11 @@ class RoomsController < ApplicationController
 
 		@room.users.each{|u| Post.create(:user_id => u.id, :room_id => @room.id, :data => '') }
 		redirect_to @room, :notice => "Rebuilt membership for #{@room.users.count} users."
+	end
+
+	def control
+		@room = Room.find(params[:id])
+		authorize! :show, @room
+		render :layout => false
 	end
 end

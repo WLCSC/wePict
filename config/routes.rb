@@ -13,6 +13,7 @@ Wepict::Application.routes.draw do
 			post "prompt"
 			get 'lock'
 			get 'unlock'
+			get 'control'
 		end
   	resources :banks do
 			post 'copy', :on => :member
