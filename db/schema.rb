@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130509125442) do
+ActiveRecord::Schema.define(:version => 20130517170957) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "assignable_id"
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(:version => 20130509125442) do
 
   create_table "questions", :force => true do |t|
     t.integer  "bank_id"
-    t.string   "content"
+    t.text     "content"
     t.integer  "sequence"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
