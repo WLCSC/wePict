@@ -108,7 +108,7 @@
 		<%= form_tag post_room_path(@room), :id => 'dform', :remote => true do %>
 
 			<%= hidden_field_tag :data, :nil %>
-
+			<%= text_field_tag :comment, nil, :style => 'text-align: center;', :placeholder => 'or Write Something' %>
 			<p>
 			<a class="btn btn-danger" href="#" onClick="clearSignature()">Clear</a>
 			<%= submit_tag "Submit", :class => 'btn btn-success' %>
@@ -137,6 +137,10 @@
 				$("#data").val(svg.getSignature());
 			});
 
+			$('#comment').change(function() {
+				svg.setText($("#comment").val());
+			});
+			
 		</script>
 	<% end %>
 

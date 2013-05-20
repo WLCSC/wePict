@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130517170957) do
+ActiveRecord::Schema.define(:version => 20130520164611) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "assignable_id"
@@ -51,7 +51,11 @@ ActiveRecord::Schema.define(:version => 20130517170957) do
     t.text     "data"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.text     "comment"
   end
+
+  add_index "posts", ["room_id"], :name => "room_id"
+  add_index "posts", ["user_id"], :name => "user_id"
 
   create_table "questions", :force => true do |t|
     t.integer  "bank_id"

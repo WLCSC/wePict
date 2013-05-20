@@ -42,12 +42,13 @@
 							$("#sig-<%= post.id %>").load(function() {
 								box = $("#sig-<%= post.id %>")[0].contentWindow;
 								scaleSVG(box,<%= @scaleTo %>);
-								box.setSignature("<%= post.data %>");
+								box.setSignature("<%= j post.data %>");
+								box.setText("<%= j post.comment %>");
 							});
 						</script>
 						<br/>
 						<div class="box">
-							<%= link_to post.user.name, modal_room_path(@room, :post => post.id), :remote => true, :id => "link-#{post.id}", :class => (post.data.length > 1 ? "" : "redlink") %>
+							<%= link_to post.user.name, modal_room_path(@room, :post => post.id), :remote => true, :id => "link-#{post.id}", :class => ((post.data.length > 1 || (post.comment && post.comment.length > 1)) ? "" : "redlink") %>
 						</div>
 					</div>
 				<% else %>
@@ -65,7 +66,7 @@
 </div>
 <div class="modal-body">
 
-<iframe src="/signature_show.svg" height="300" width="300" id="sig-modal" frameBorder="0" style="border: none; margin: auto;"></iframe>
+	<iframe src="<%= root_path %>signature_show.svg" height="300" width="300" id="sig-modal" frameBorder="0" style="border: none; margin: auto;"></iframe>
 
 
 </div>

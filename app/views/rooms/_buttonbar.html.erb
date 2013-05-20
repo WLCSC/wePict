@@ -1,0 +1,5 @@
+<div id="ctrlBar">
+	<%= link_to "Clear All Posts", clear_room_path(@room), :class => 'btn btn-warning', :remote => true, :confirm => "Really clear all posts?" %>
+	<%= link_to "Toggle Curtain", curtain_room_path(@room), :class => 'btn btn-info', :remote => true %>
+</div>
+

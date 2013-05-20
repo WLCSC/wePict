@@ -95,12 +95,9 @@ class RoomsController < ApplicationController
 		authorize! :show, @room
 		@post = @room.posts.where(:user_id => current_user.id).first
 		@post.data = params[:data]
+		@post.comment = params[:comment]
 		@post.save
 		render 'post'
-	end
-
-	def rebuild
-
 	end
 
 	def clear

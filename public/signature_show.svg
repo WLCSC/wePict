@@ -1,9 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
   <rect id="r" width="300" height="300" fill="#eee"/>
   <path id="p" stroke="black" stroke-width="2" fill="none" pointer-events="none"/>
+	<foreignObject width="280" height="280" x="10" y="10">
+		<body xmlns="http://www.w3.org/1999/xhtml">
+			<div id="txt" width="280px" style="font-size: 32px;"></div>
+		</body>
+	</foreignObject>
+
   <script>
     var r = document.getElementById('r'),
         p = document.getElementById('p'),
+				txt = document.getElementById('txt'),
         signaturePath = '',
         isDown = false;
 
@@ -19,6 +26,10 @@
 	function setSignature(s) {
 		signaturePath = s;
 		p.setAttribute('d', signaturePath);
+	}
+
+	function setText(s) {
+		txt.innerHTML = s;
 	}
   </script>
 </svg>
