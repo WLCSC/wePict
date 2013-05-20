@@ -170,6 +170,7 @@
 										box = $("#sig-<%= post.id %>")[0].contentWindow;
 										scaleSVG(box,100);
 										box.setSignature("<%= post.data %>");
+										box.setText("<%= post.comment %>");
 									});
 								</script>
 							</td>
