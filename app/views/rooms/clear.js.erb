@@ -8,6 +8,7 @@ setTimeout(function(){
 	$("#sig-<%= p.id %>")[0].contentWindow.setSignature("<%= p.data %>");
 	<% publish_to "/wepict/rooms/post/#{@room.id}" do %>
 		$("#sig-<%= p.id %>")[0].contentWindow.setSignature("<%= p.data %>");
+		$("#link-<%= p.id %>").addClass("redlink");
 		beep();
 	<% end %>
 <% end %>

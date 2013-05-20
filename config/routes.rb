@@ -14,6 +14,7 @@ Wepict::Application.routes.draw do
 			get 'lock'
 			get 'unlock'
 			get 'control'
+			get 'curtain'
 		end
   	resources :banks do
 			post 'copy', :on => :member

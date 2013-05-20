@@ -209,4 +209,9 @@ class RoomsController < ApplicationController
 		authorize! :show, @room
 		render :layout => false
 	end
+
+	def curtain
+		@room = Room.find(params[:id])
+		authorize! :show, @room
+	end
 end

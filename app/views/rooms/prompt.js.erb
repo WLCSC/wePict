@@ -1,14 +1,15 @@
 $("#flashbox").append('<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button>Posted new prompt.</div>');
 setTimeout(function(){
 		$('#flashbox  .alert').hide('fast', function(){ $target.remove(); });
-  }, 5000);
+}, 5000);
+<% @content = markdown @room.prompt %>
 <% publish_to "/wepict/rooms/prompt/#{@room.id}" do %>
 	<% if @room.prompt.empty? %>
 		$('#promptbox').hide('fast');
 		doubleBeep();
 	<% else %>
 		$('#promptbox').show('fast');
-		$('#promptbox').html('<%= markdown @room.prompt %>');
+		$('#promptbox').html('<%= j @content %>');
 		doubleBeep();
 	<% end %>
 <% end %>

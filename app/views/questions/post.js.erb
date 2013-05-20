@@ -6,12 +6,12 @@ $("#qb<%= @question.id %>").html("Already Posted");
 setTimeout(function(){
 		$('#flashbox  .alert').hide('fast', function(){ $target.remove(); });
 }, 5000);
-
+<% @content = markdown @room.prompt %>
 <% publish_to "/wepict/rooms/prompt/#{@room.id}" do %>
 	<% if @room.prompt.empty? %>
 		$('#promptbox').hide('fast');
 	<% else %>
 		$('#promptbox').show('fast');
-		$('#promptbox').html('<%= @room.prompt %>');
+		$('#promptbox').html('<%= j @content %>');
 	<% end %>
 <% end %>

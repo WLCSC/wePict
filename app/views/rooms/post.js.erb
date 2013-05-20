@@ -7,5 +7,10 @@ setTimeout(function(){
 
 <% publish_to "/wepict/rooms/post/#{@room.id}" do %>
 	$("#sig-<%= @post.id %>")[0].contentWindow.setSignature("<%= @post.data %>");
+	<% if @post.data.length > 1 %>
+		$("#link-<%= @post.id %>").removeClass("redlink");
+	<% else %>
+		$("#link-<%= @post.id %>").addClass("redlink");
+	<% end %>
 	beep();
 <% end %>

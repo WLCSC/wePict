@@ -1,4 +1,7 @@
 <h1>Questions for <%= @bank.name %></h1>
+
+<%= render :partial => 'rooms/buttonbar' %>
+<br/>
 <p>
 <%= link_to 'New Question', new_room_bank_question_path(@room, @bank), :class => 'btn btn-primary' %>
 

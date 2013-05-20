@@ -37,11 +37,8 @@
 							<%= submit_tag "Post Prompt", :class => 'btn btn-primary' %>
 						<% end %>
 
-						<div>
-						<%= link_to "Clear All Posts", clear_room_path(@room), :class => 'btn btn-warning', :remote => true, :confirm => "Really clear all posts?" %>
-						<%= link_to "Rebuild Membership", rebuild_room_path(@room), :class => 'btn btn-inverse', :confirm => 'WARNING: This will clear all existing posts.  Continue?' %>
-					</div>
-
+						<%= render :partial => 'buttonbar' %>
+						
 					</div>
 				</div>
 			</div><!--/row-->
