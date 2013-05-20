@@ -104,7 +104,8 @@
 		<div id="promptbox" class="alert alert-info promptbox" <%= 'style="display: none"' if @room.prompt && !@room.prompt.empty? %>>
 			<%= markdown @room.prompt %>
 		</div>
-		<iframe src="<%= root_path %>signature.svg" height="300" width="300" id="sig" frameBorder="0" style="border: thin solid black;"></iframe>
+		<iframe src="<%= root_path %>signature.svg" height="300" width="300" id="sig" frameBorder="0" style="border: thin solid black; border-bottom: none;"></iframe>
+		<div class="canvasAttach">Draw Something</div>
 		<%= form_tag post_room_path(@room), :id => 'dform', :remote => true do %>
 
 			<%= hidden_field_tag :data, :nil %>
