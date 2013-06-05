@@ -3,7 +3,7 @@ WePict
 
 WePict is a classroom response system of sorts that allows students to submit drawings & have them displayed to the classroom.
 
-How To
+How-To
 ------
 * bundle install
 * Edit/create config/database.yml, config/app_config.yml, and config/private_pub.yml
