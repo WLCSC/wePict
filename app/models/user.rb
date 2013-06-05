@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
 	has_many :banks, :through => :managed_rooms
 
 	def internal_user_cannot_have_password
-		if password && internal
+		if password && !internal
 			errors.add(:base, "An LDAP user can't have a password in the database")
 		end
 	end
