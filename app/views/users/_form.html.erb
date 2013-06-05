@@ -51,9 +51,12 @@
     <div class="controls">
       <%= f.password_field :password_confirmation, :class => 'password_field' %>
     </div>
-  </div>
-
+	</div>
+	<%= f.hidden_field :internal, :value => true %>
+<% else %>
+	<%= f.hidden_field :internal, :value => false %>
 <% end %>
+
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
