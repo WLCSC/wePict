@@ -4,7 +4,14 @@
 		e.document.firstChild.setAttribute("height", s);
 	}
 </script>
-
+<div style="
+position: absolute;
+top:5px;
+left:5px;
+z-index:9999;
+">
+<%= render :partial => 'buttonbar' %>
+</div>
 <div id="curtain"></div>
 
 <% if params[:sounds] %>

@@ -54,9 +54,6 @@ ActiveRecord::Schema.define(:version => 20130520164611) do
     t.text     "comment"
   end
 
-  add_index "posts", ["room_id"], :name => "room_id"
-  add_index "posts", ["user_id"], :name => "user_id"
-
   create_table "questions", :force => true do |t|
     t.integer  "bank_id"
     t.text     "content"
