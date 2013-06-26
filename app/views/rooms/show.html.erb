@@ -22,6 +22,15 @@
 					<%= text_area_tag :content %><br/>
 					<%= submit_tag "Post Prompt", :class => 'btn btn-large btn-primary' %>
 				<% end %>
+                                <%= form_for(@room, :remote => true) do |f|  %>
+                                  <%= f.check_box :autoclear, :class => "checkthing" %> Automatically Clear Posts After Posting Prompt?
+                                  <script>
+$('body').on("click", '.checkthing', function() {
+    alert("something");
+  $('.checkthing').parent('form').submit();
+});
+                                  </script>
+                                <% end %>
 			</div>
 
 			<div class="span3">

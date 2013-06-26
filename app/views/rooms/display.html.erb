@@ -28,9 +28,8 @@ z-index:9999;
 
 <%= subscribe_to "/wepict/rooms/post/#{@room.id}" %>
 <%= subscribe_to "/wepict/rooms/curtain/#{@room.id}" %>
-
-<% if params[:prompt] %>
 <%= subscribe_to "/wepict/rooms/prompt/#{@room.id}" %>
+<% if params[:prompt] %>
 
 <div id="promptbox" class="alert alert-info promptbox" <%= 'style="display: none"' if @room.prompt && !@room.prompt.empty? %>>
 	<%= markdown @room.prompt %>

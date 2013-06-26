@@ -174,6 +174,12 @@ class RoomsController < ApplicationController
 		authorize! :update, @room
 		@room.prompt = params[:content]
 		@room.save
+                if @room.autoclear == true
+                  @room.posts.each do |p|
+			p.data = ""
+			p.save
+                  end
+                end
 	end
 
 	def lock

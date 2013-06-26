@@ -1,5 +1,5 @@
 class Room < ActiveRecord::Base
-  attr_accessible :name, :notes, :user_id, :user_name
+  attr_accessible :name, :notes, :user_id, :user_name, :autoclear
 	attr_accessor :user_name
 	before_save :set_user
 	has_many :assignments

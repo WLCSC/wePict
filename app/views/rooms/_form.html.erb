@@ -7,6 +7,7 @@
 		</div>
 	</div>
 	<%= f.input :notes %>
+        <%= f.check_box :autoclear %> Automatically Clear Posts After Posting Prompt?
   <div class="form-actions">
     <%= f.button :submit, :class => 'btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
