@@ -5,42 +5,40 @@ class SessionsController < ApplicationController
 	def new
 	end
 
+
 	def create
 		params[:username].downcase!
 		user = User.where(:username => params[:username]).first
-		if APP_CONFIG[:auth_ldap] 
+		if user
+		n = nil
+		if APP_CONFIG[:auth_ldap] && user.password_hash == nil
 			lgi = ldap_login(params[:username], params[:password])
 			if lgi && lgi.length > 0
 				user = ldap_populate(params[:username], params[:password], user)
 				session[:user_id] = user.id
-				flash[:notice] = "Logged in!"
-				redirect_to root_path
+				n = "Logged in!"
+				v = true
 			else
-				flash[:alert] = "Invalid login."
-				redirect_to sign_in_path 
+				n = "Invalid login."
 			end
-		elsif APP_CONFIG[:auth_local] && user && user.email_address != nil
+		end
+		if APP_CONFIG[:auth_local] && user && user.password_hash != nil
 			if user.password_hash == BCrypt::Engine.hash_secret(params[:password], user.password_salt)
 				session[:user_id] = user.id
-				flash[:notice] = "Logged in!"
-				redirect_to root_path
+				n = "Logged in!"
+				v = true
 			else
-				flash[:alert] = "Invalid local login."
-				redirect_to sign_in_path
-
+				n = "Invalid login."
 			end
+		end
+		if v
+			redirect_to root_path, :notice => n
+		end
 		else
-			flash[:alert] = "You are not allowed to log in."
-			redirect_to root_path
+			redirect_to root_path, :alert => 'Invalid login.'
 		end
-
-		Room.all.each do |r|
-			if r.users.include? self
-				Post.create(:user_id => self.id, :room_id => r.id, :data => '') unless Post.where(:user_id => self.id, :room_id => r.id).count > 0
-			end
-		end
-		
 	end
+
 
 	def destroy
 		session[:user_id] = nil  
