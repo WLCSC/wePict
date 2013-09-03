@@ -14,4 +14,13 @@ setTimeout(function(){
 		$('#promptbox').show('fast');
 		$('#promptbox').html('<%= j @content %>');
 	<% end %>
+
+	<% if @room.autoclear == true %>
+          <% @room.posts.each do |p| %>
+            $("#sig-<%= p.id %>")[0].contentWindow.setSignature("<%= p.data %>");
+                $("#link-<%= p.id %>").addClass("redlink");
+                beep();
+          <% end %>
+        <% end %>
+
 <% end %>

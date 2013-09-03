@@ -102,5 +102,13 @@ class QuestionsController < ApplicationController
 		@question = @bank.questions.find(params[:id])
 		@room.prompt = @question.content
 		@room.save
+		if @room.autoclear == true
+                  @room.posts.each do |p|
+			p.data = ""
+			p.comment = ""
+			p.save
+                  end
+                end
+
 	end
 end

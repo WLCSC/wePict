@@ -105,6 +105,7 @@ class RoomsController < ApplicationController
 		authorize! :update, @room
 		@room.posts.each do |p|
 			p.data = ""
+			p.comment = ""
 			p.save
 		end
 	end
@@ -177,6 +178,7 @@ class RoomsController < ApplicationController
                 if @room.autoclear == true
                   @room.posts.each do |p|
 			p.data = ""
+			p.clear = ""
 			p.save
                   end
                 end
