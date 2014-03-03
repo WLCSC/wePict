@@ -3,9 +3,11 @@
 <%= render :partial => 'rooms/buttonbar' %>
 <br/>
 <p>
-<%= link_to 'New Question', new_room_bank_question_path(@room, @bank), :class => 'btn btn-primary' %>
+<%= link_to 'New Question', new_user_bank_question_path(current_user, @bank, :room_id => @room.id), :class => 'btn btn-primary' %>
 
-<%= link_to "Back to Question Banks", room_banks_path(@room), :class => 'btn btn-inverse' %><% if @bank.questions.count == 0 %><%= link_to 'Delete', [@room, @bank], :method => 'delete', :class => 'btn btn-danger' %><% end %>
+<%= link_to "Back to Question Banks", user_banks_path(current_user), :class => 'btn btn-inverse' %>
+
+<% if @bank.questions.count == 0 %><%= link_to 'Delete', [current_user, @bank], :method => 'delete', :class => 'btn btn-danger' %><% end %>
 </p>
 <table class="table">
 	<% @questions.order("sequence ASC").each do |question| %>
@@ -16,36 +18,18 @@
 					<p class="qnote"><%= question.notes %></p>
 				<% end %>
 			</td>
-			<td><%= link_to "Post as Prompt", post_room_bank_question_path(@room, @bank, question), :class => 'btn btn-mini btn-success', :id => "qb#{question.id}", :remote => true %></td>
-			<td><%= link_to 'Edit', edit_room_bank_question_path(@room, @bank, question,), :class => 'btn btn-mini btn-warning' %></td>
-			<td><%= link_to 'Destroy', [@room, @bank, question], method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
+            <td><%= link_to "Post as Prompt", post_user_bank_question_path(current_user, @bank, question, :room_id => @room.id), :class => 'btn btn-mini btn-success', :id => "qb#{question.id}", :remote => true %></td>
+            <td><%= link_to 'Edit', edit_user_bank_question_path(current_user, @bank, question, :room_id => @room.id), :class => 'btn btn-mini btn-warning' %></td>
+            <td><%= link_to 'Destroy', user_bank_question_path(current_user, @bank, question, :room_id => @room.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
 		</tr>
 	<% end %>
 </table>
 
 <p>
-<%= link_to 'New Question', new_room_bank_question_path(@room, @bank), :class => 'btn btn-primary' %>
+<%= link_to 'New Question', new_user_bank_question_path(current_user, @bank, :room_id => @room.id), :class => 'btn btn-primary' %>
 
-<%= link_to "Back to Question Banks", room_banks_path(@room), :class => 'btn btn-inverse' %>
+<%= link_to "Back to Question Banks", user_banks_path(current_user), :class => 'btn btn-inverse' %>
 
-<% if @bank.questions.count == 0 %><%= link_to 'Delete', [@room, @bank], :method => 'delete', :class => 'btn btn-danger' %><% end %>
+<% if @bank.questions.count == 0 %><%= link_to 'Delete', [current_user, @bank], :method => 'delete', :class => 'btn btn-danger' %><% end %>
 </p>
-
-<div class="accordion" id="accordion2" style="margin-top: 8px;">
-	<div class="accordion-group">
-		<div class="accordion-heading">
-			<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-				Copy this Bank to Another Room
-			</a>
-		</div>
-		<div id="collapseOne" class="accordion-body collapse">
-			<div class="accordion-inner">
-				<%= form_tag copy_room_bank_path(@room, @bank)	do %>
-					<p>Copy to which room? <%= select_tag :target, options_from_collection_for_select((current_user.admin? ? Room.all : current_user.managed_rooms), 'id', 'name') %></p>
-					<p><%= submit_tag "Go!", :class => 'btn btn-success' %></p>
-				<% end %>
-			</div>
-		</div>
-	</div>
-</div>
 

@@ -24,7 +24,8 @@
 <%= pills_for @group.users %>
 
 <% if current_user.admin? %>
-<div class="form-actions">
+    <div class="form-actions">
+        <%= link_to "Reset Membership", reset_group_path(@group), :class => 'btn btn-warning', :confirm => 'Are you sure?' %>
   <%= link_to "Edit", edit_group_path(@group), :class => 'btn' %>
   <%= link_to "Destroy Group", group_path(@group), :method => 'delete', :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')), :class => 'btn btn-danger' if @group.users.count == 0 %>
 </div>

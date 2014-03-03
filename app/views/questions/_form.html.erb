@@ -1,5 +1,6 @@
-<%= simple_form_for([@room, @bank, @question]) do |f| %>
-  <%= f.error_notification %>
+<%= simple_form_for([current_user, @bank, @question]) do |f| %>
+    <%= f.error_notification %>
+    <%= hidden_field_tag :room_id,  params[:room_id] %>
 
 	<div class="form-inputs">
 		<%= f.input :content, :as => :text, :input_html => {:rows => 4} %>

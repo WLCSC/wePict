@@ -1,4 +1,4 @@
-<h1>Question Banks for <%= @room.name %></h1>
+<h1>Your Question Banks</h1>
 
 <table class="table">
   <tr>
@@ -9,7 +9,7 @@
 
 <% @banks.each do |bank| %>
   <tr>
-		<td><%= link_to bank.name, [@room, bank] %></td>
+      <td><%= link_to bank.name, user_bank_path(current_user.id, bank.id, :room_id => params[:room_id]) %></td>
 		<td><%= bank.questions.count %></td>
     <td><%= bank.notes %></td>
   </tr>
@@ -18,5 +18,5 @@
 
 <br />
 
-<%= link_to 'New Bank', new_room_bank_path(@room), :class => 'btn btn-primary' %>
+<%= link_to 'New Bank', new_user_bank_path(current_user), :class => 'btn btn-primary' %>
 <%= link_to "Back to Room", @room, :class => 'btn btn-inverse' %>

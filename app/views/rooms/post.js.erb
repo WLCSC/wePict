@@ -9,10 +9,12 @@ setTimeout(function(){
 <% publish_to "/wepict/rooms/post/#{@room.id}" do %>
 	$("#sig-<%= @post.id %>")[0].contentWindow.setSignature("<%= @post.data %>");
 	$("#sig-<%= @post.id %>")[0].contentWindow.setText("<%= @post.comment %>");
-	<% if @post.data.length > 1 || @post.comment.length > 1 %>
+	<% if @post.data.length > 1 || @post.comment.length > 0 %>
 		$("#link-<%= @post.id %>").removeClass("redlink");
+		$("#link-<%= @post.id %>").parent().removeClass("redbox");
 	<% else %>
 		$("#link-<%= @post.id %>").addClass("redlink");
+		$("#link-<%= @post.id %>").parent().addClass("redbox");
 	<% end %>
 	beep();
 <% end %>

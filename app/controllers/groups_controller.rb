@@ -101,4 +101,14 @@ class GroupsController < ApplicationController
 		redirect_to @group
 	end
 
+    def reset
+		@group = Group.find(params[:id])
+        @group.memberships.each do |m|
+            m.delete
+        end
+
+        flash[:info] = "Reset group."
+        redirect_to @group
+	end
+
 end

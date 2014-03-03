@@ -63,7 +63,7 @@ $('body').on("click", '.checkthing', function() {
 				</p>
 
 				<p>
-				<%= link_to "Question Banks", room_banks_path(@room), :class => 'btn btn-large btn-primary' %>
+                <%= link_to "Question Banks", user_banks_path(current_user, :room_id => @room.id), :class => 'btn btn-large btn-primary' %>
 				</p>
 
 				<p>
@@ -113,12 +113,12 @@ $('body').on("click", '.checkthing', function() {
 		<div id="promptbox" class="alert alert-info promptbox" <%= 'style="display: none"' if @room.prompt && !@room.prompt.empty? %>>
 			<%= markdown @room.prompt %>
 		</div>
-		<iframe src="<%= root_path %>signature.svg" height="300" width="300" id="sig" frameBorder="0" style="border: thin solid black; border-bottom: none;"></iframe>
+		<iframe src="<%= root_path %>signature.svg" id="sig" frameBorder="0" style="border: thin solid black; border-bottom: none;" width="300" height="300"></iframe>
 		<div class="canvasAttach">Draw Something</div>
 		<%= form_tag post_room_path(@room), :id => 'dform', :remote => true do %>
 
 			<%= hidden_field_tag :data, :nil %>
-			<%= text_field_tag :comment, nil, :style => 'text-align: center;', :placeholder => 'or Write Something' %>
+            <%= text_field_tag :comment, nil, :style => 'text-align: center;', :placeholder => 'or Write Something', :id => 'comment' %>
 			<p>
 			<a class="btn btn-danger" href="#" onClick="clearSignature()">Clear</a>
 			<%= submit_tag "Submit", :class => 'btn btn-success' %>
@@ -147,7 +147,7 @@ $('body').on("click", '.checkthing', function() {
 				$("#data").val(svg.getSignature());
 			});
 
-			$('#comment').change(function() {
+			$('#comment').on("change keyup", function() {
 				svg.setText($("#comment").val());
 			});
 			

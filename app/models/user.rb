@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
 	has_many :posts
 	has_many :rooms, :through => :posts
 	has_many :managed_rooms, :class_name => "Room"
-	has_many :banks, :through => :managed_rooms
+	has_many :banks
 
 	def internal_user_cannot_have_password
 		if password && !internal

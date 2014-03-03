@@ -1,7 +1,7 @@
 class Bank < ActiveRecord::Base
   attr_accessible :name, :notes, :room_id
 	has_many :questions
-	belongs_to :room
+	belongs_to :user
 
 	def copy target
 		bank = self.dup

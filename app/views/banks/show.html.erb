@@ -1,4 +1,4 @@
-<h1><%= @room.name %> - <%= @bank.name %></h1>
+<h1><%= @bank.name %></h1>
 <p><b>Notes</b></p>
 <%= @bank.notes %>
 <hr/>
@@ -13,7 +13,7 @@
 <div class="row">
 	<div class="span6">
 		<h4>Quick Add Question</h4>
-		<%= simple_form_for [@room, @bank, @bank.questions.build], :remote => true do |f| %>
+		<%= simple_form_for [current_user, @bank, @bank.questions.build], :remote => true do |f| %>
 			<%= f.input :content %>
 			<%= f.input :sequence, :value => (@bank.questions.maximum('sequence').to_i || 0) + 1 %>
 			<%= hidden_field_tag "remote", true %>
@@ -25,7 +25,7 @@
 	</div>
 </div>
 
-<%= link_to "Back to Bank List", room_banks_path(@room), :class => 'btn' %>
+<%= link_to "Back to Bank List", user_banks_path(current_user), :class => 'btn' %>
 <%= link_to "Back to Room", @room, :class => 'btn' %>
-<%= link_to 'Edit', edit_room_bank_path(@room, @bank), :class => 'btn' %>
-<% if @bank.questions.count == 0 %><%= link_to 'Delete', [@room, @bank], :method => 'delete', :class => 'btn btn-danger' %><% end %>
+<%= link_to 'Edit', edit_user_bank_path(current_user, @bank), :class => 'btn' %>
+<% if @bank.questions.count == 0 %><%= link_to 'Delete', [current_user, @bank], :method => 'delete', :class => 'btn btn-danger' %><% end %>

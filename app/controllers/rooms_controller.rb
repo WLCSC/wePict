@@ -178,7 +178,7 @@ class RoomsController < ApplicationController
                 if @room.autoclear == true
                   @room.posts.each do |p|
 			p.data = ""
-			p.clear = ""
+			p.comment = ""
 			p.save
                   end
                 end

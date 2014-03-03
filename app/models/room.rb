@@ -5,7 +5,6 @@ class Room < ActiveRecord::Base
 	has_many :assignments
 	belongs_to :user
 	has_many :posts
-	has_many :banks
 
 	def set_user
 		if self.user_name

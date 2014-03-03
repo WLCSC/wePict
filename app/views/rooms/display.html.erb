@@ -53,8 +53,8 @@ z-index:9999;
 							});
 						</script>
 						<br/>
-						<div class="box">
-							<%= link_to post.user.name, modal_room_path(@room, :post => post.id), :remote => true, :id => "link-#{post.id}", :class => ((post.data.length > 1 || (post.comment && post.comment.length > 1)) ? "" : "redlink") %>
+                        <div class="box<%= (post.data.length > 1 || (post.comment && post.comment.length > 0)) ? "" : " redbox" %>">
+							<%= link_to post.user.name, modal_room_path(@room, :post => post.id), :remote => true, :id => "link-#{post.id}", :class => ((post.data.length > 1 || (post.comment && post.comment.length > 0)) ? "" : "redlink") %>
 						</div>
 					</div>
 				<% else %>
