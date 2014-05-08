@@ -5,9 +5,7 @@
 <p>
 <%= link_to 'New Question', new_user_bank_question_path(current_user, @bank, :room_id => @room.id), :class => 'btn btn-primary' %>
 
-<%= link_to "Back to Question Banks", user_banks_path(current_user), :class => 'btn btn-inverse' %>
-
-<% if @bank.questions.count == 0 %><%= link_to 'Delete', [current_user, @bank], :method => 'delete', :class => 'btn btn-danger' %><% end %>
+<%= link_to "Back to Question Banks", user_banks_path(current_user, :room_id => @room.id), :class => 'btn btn-inverse' %>
 </p>
 <table class="table">
 	<% @questions.order("sequence ASC").each do |question| %>
@@ -28,8 +26,8 @@
 <p>
 <%= link_to 'New Question', new_user_bank_question_path(current_user, @bank, :room_id => @room.id), :class => 'btn btn-primary' %>
 
-<%= link_to "Back to Question Banks", user_banks_path(current_user), :class => 'btn btn-inverse' %>
+<%= link_to "Back to Question Banks", user_banks_path(current_user, :room_id => @room.id), :class => 'btn btn-inverse' %>
 
-<% if @bank.questions.count == 0 %><%= link_to 'Delete', [current_user, @bank], :method => 'delete', :class => 'btn btn-danger' %><% end %>
+<%= link_to 'Delete', user_bank_path(current_user, @bank, :room_id => @room.id), :method => 'delete', :class => 'btn btn-danger', :conform => "Really delete this bank?" %>
 </p>
 

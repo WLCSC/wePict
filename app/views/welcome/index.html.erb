@@ -3,7 +3,15 @@
 		<h2>Rooms You Belong To</h2>
 			<%= current_user.rooms.empty? ? "None right now" : pills_for(current_user.rooms) %>
 		<h2>Rooms You Own</h2>
-			<%= Room.where(:user_id => current_user.id).empty? ? "None right now" : pills_for(Room.where(:user_id => current_user.id)) %>
+            <%= Room.where(:user_id => current_user.id).empty? ? "None right now" : pills_for(Room.where(:user_id => current_user.id)) %>
+        <% if current_user.banks.count > 0 %>
+            <h2>Your Question Banks</h2>
+            <ul class="nav nav-pills">
+            <% current_user.banks.each do |b| %>
+                <li><%= link_to b.name, user_bank_path(current_user, b, :room_id => current_user.rooms.first.id)%></li>
+            <% end %>
+        </ul>
+        <% end %>
 	<% else %>
 		<div class="alert">You don't belong to any rooms yet.</div>
 	<% end %>

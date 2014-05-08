@@ -83,8 +83,8 @@ module ApplicationHelper
 		end
 	end
 
-	def i(c,w=false)
-		('<i class="icon-' + c + (w ? " icon-white " : '') + '"></i>').html_safe
+	def i(c)
+		('<i class="fa fa-' + c + '"></i>').html_safe
 	end
 
 	def markdown(text)

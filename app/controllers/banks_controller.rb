@@ -4,7 +4,6 @@ class BanksController < ApplicationController
   def index
 		@room = Room.find(params[:room_id])
     @banks = current_user.banks
-		authorize! :manage, @room
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,11 +14,11 @@ class BanksController < ApplicationController
   # GET /banks/1
   # GET /banks/1.json
   def show
-		@room = Room.find(params[:room_id])
+		@room = Room.find(params[:room_id] || current_user.rooms.first.id)
     @bank = current_user.banks.find(params[:id])
 		authorize! :read, @bank
 		
-		redirect_to user_bank_questions_path(@room, @bank, :room_id => @room.id)
+		redirect_to user_bank_questions_path(current_user, @bank, :room_id => @room.id)
   end
 
   # GET /banks/new
@@ -44,13 +43,13 @@ class BanksController < ApplicationController
   # POST /banks
   # POST /banks.json
   def create
-		#@room = Room.find(params[:room_id])
+		@room = Room.find(params[:room_id])
     @bank = current_user.banks.build(params[:bank])
 		authorize! :create, @bank
 
     respond_to do |format|
       if @bank.save
-        format.html { redirect_to [current_user, @bank], notice: 'Bank was successfully created.' }
+        format.html { redirect_to [current_user, @bank],:room_id => @room.id, notice: 'Bank was successfully created.' }
       else
         format.html { render action: "new" }
       end
@@ -66,7 +65,7 @@ class BanksController < ApplicationController
 
     respond_to do |format|
       if @bank.update_attributes(params[:bank])
-        format.html { redirect_to [current_user, @bank], notice: 'Bank was successfully updated.' }
+        format.html { redirect_to [current_user, @bank], :room_id => @room.id, notice: 'Bank was successfully updated.' }
       else
         format.html { render action: "edit" }
       end
@@ -82,7 +81,7 @@ class BanksController < ApplicationController
     @bank.destroy
 
     respond_to do |format|
-      format.html { redirect_to user_banks_url(@room), :notice => 'Removed question bank.' }
+      format.html { redirect_to user_banks_url(:room_id => @room), :notice => 'Removed question bank.' }
     end
   end
 

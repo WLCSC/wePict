@@ -219,4 +219,26 @@ class RoomsController < ApplicationController
 		@room = Room.find(params[:id])
 		authorize! :show, @room
 	end
+
+    def sublock
+        @room = Room.find(params[:id])
+        authorize! :update, @room
+        @room.submittable = false
+        @room.save
+        redirect_to @room, :notice => 'Locked submissions'
+    end
+
+    def subunlock
+        @room = Room.find(params[:id])
+        authorize! :update, @room
+        @room.submittable = true
+        @room.save
+        redirect_to @room, :notice => 'Unlocked submissions'
+    end
+
+    def submit
+        @room = Room.find(params[:id])
+        @bank = @room.submission_target
+        @q = @bank.questions.create(:content => params[:content], :sequence => 0)
+    end
 end

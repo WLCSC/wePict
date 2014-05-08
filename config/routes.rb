@@ -14,6 +14,9 @@ Wepict::Application.routes.draw do
             get 'unlock'
             get 'control'
             get 'curtain'
+            get 'sublock'
+            get 'subunlock'
+            post 'submit'
         end
     end
 

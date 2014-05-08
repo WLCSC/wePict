@@ -2,7 +2,7 @@
 	<% if @room.open %>
 		<h1><%= @room.name %></h1>
 	<% else %>
-		<h1 style="color: #ba2222;"><i class="icon-ban-circle"></i> <%= @room.name %> <i class="icon-ban-circle"></i></h1>
+        <h1 style="color: #ba2222;"><%= i "ban" %> <%= @room.name %> <%= i "ban" %></h1>
 	<% end %>
 </div>
 
@@ -41,7 +41,7 @@ $('body').on("click", '.checkthing', function() {
 					<%= number_field_tag 'r', 5, :class => 'input-micro', :min => 1, :max => 12, :step => 1 %> Grid
 					</p>
 					<p style="font-style: italic; font-size: 10px; margin-top: 2px; line-height: 12px;">
-					Note that if your image size is too large, it will overflow over the edges of the grid.  Some experimentation may be necessary to find the optimal set up for your screen.
+					Note that if your image size is too large, it will overflow over the edges of the grid.  Some experimentation may be necessary to find the optimal set up for your screen &amp; number of participants.
 					</p>
 					<p>
 					<%= check_box_tag 'prompt' %> Show Prompt?<br/>
@@ -60,7 +60,17 @@ $('body').on("click", '.checkthing', function() {
 				<% else %>
 					<%= link_to "#{i 'unlock'} Unlock Room".html_safe, unlock_room_path(@room), :class => 'btn btn-success btn-large'%>
 				<% end %>
-				</p>
+                </p>
+
+                <% if @room.submission_target %>
+                <p>
+				<% if @room.submittable %>
+					<%= link_to "#{i 'ban'} Lock Question Submission".html_safe, sublock_room_path(@room), :class => 'btn btn-danger'%>
+				<% else %>
+					<%= link_to "#{i 'inbox'} Unlock Question Submission".html_safe, subunlock_room_path(@room), :class => 'btn btn-success'%>
+				<% end %>
+                </p>
+                <% end %>
 
 				<p>
                 <%= link_to "Question Banks", user_banks_path(current_user, :room_id => @room.id), :class => 'btn btn-large btn-primary' %>
@@ -120,7 +130,7 @@ $('body').on("click", '.checkthing', function() {
 			<%= hidden_field_tag :data, :nil %>
             <%= text_field_tag :comment, nil, :style => 'text-align: center;', :placeholder => 'or Write Something', :id => 'comment' %>
 			<p>
-			<a class="btn btn-danger" href="#" onClick="clearSignature()">Clear</a>
+			<a class="btn btn-danger" href="#" onClick="clearPost()">Clear</a>
 			<%= submit_tag "Submit", :class => 'btn btn-success' %>
 			</p>
 		<% end %>
@@ -133,9 +143,9 @@ $('body').on("click", '.checkthing', function() {
 				pathdata.textContent = svg.getSignature();
 			}
 
-			function clearSignature() {
+			function clearPost() {
 				svg.clearSignature();
-				pathdata.textContent = '';
+				svg.clearText();
 			}
 
 			function setSignature(s) {
@@ -174,7 +184,7 @@ $('body').on("click", '.checkthing', function() {
 								<p>Last updated <%= nice_datetime(post.updated_at) %>.</p>
 							</td>
 							<td>
-								<iframe src="<%= root_path %>signature_show.svg" height="100" width="100" id="sig-<%= post.id %>" rameBorder="0" style="border: thin solid black;"></iframe>
+								<iframe src="<%= root_path %>signature_show.svg" height="100" width="100" id="sig-<%= post.id %>" frameBorder="0" style="border: thin solid black;"></iframe>
 								<script>
 									$("#sig-<%= post.id %>").load(function() {
 										box = $("#sig-<%= post.id %>")[0].contentWindow;
@@ -234,5 +244,16 @@ $('body').on("click", '.checkthing', function() {
 	<% end %>
 <% end %>
 
-<%= tabify :manage => 'Management', :you => "Your Post", :posts => 'View Posts', :users => "Users & Groups" %>
+<% if @room.submittable && @room.submission_target && can?(:read, @room) %>
+    <% content_for :submit do %>
+        <h2>Submit a Question</h2>
+
+        <%= form_tag submit_room_path, :remote => true do %>
+            <%= text_area_tag :content %>
+            <%= submit_tag "Submit Question", :class => 'btn btn-large btn-success' %>
+        <% end %>
+    <% end %>
+<% end %>
+
+<%= tabify :manage => 'Management', :you => "Your Post", :posts => 'View Posts', :submit => 'Submit a Question', :users => "Users & Groups" %>
 

@@ -1,10 +1,11 @@
 class Room < ActiveRecord::Base
-  attr_accessible :name, :notes, :user_id, :user_name, :autoclear
+  attr_accessible :name, :notes, :user_id, :user_name, :autoclear, :submittable, :submission_target_id
 	attr_accessor :user_name
 	before_save :set_user
 	has_many :assignments
 	belongs_to :user
 	has_many :posts
+    belongs_to :submission_target, :class_name => "Bank"
 
 	def set_user
 		if self.user_name

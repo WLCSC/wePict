@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131209160757) do
+ActiveRecord::Schema.define(:version => 20140311130919) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "assignable_id"
@@ -73,11 +73,13 @@ ActiveRecord::Schema.define(:version => 20131209160757) do
     t.string   "name"
     t.text     "notes"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
     t.text     "prompt"
     t.boolean  "open"
     t.boolean  "autoclear"
+    t.integer  "submission_target_id"
+    t.boolean  "submittable"
   end
 
   create_table "users", :force => true do |t|

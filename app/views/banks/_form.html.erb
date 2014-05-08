@@ -1,6 +1,7 @@
-<%= simple_form_for([current_user,@bank]) do |f| %>
+<%= simple_form_for([current_user,@bank], :room_id => @room.id) do |f| %>
   <%= f.error_notification %>
 
+  <%= hidden_field_tag :room_id, @room.id %>
   <div class="form-inputs">
     <%= f.input :name %>
     <%= f.input :notes %>

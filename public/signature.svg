@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300" id="target">
   <rect id="r" width="300" height="300" fill="#ffa"/>
 	<foreignObject width="280" height="280" x="10" y="10">
 		<body xmlns="http://www.w3.org/1999/xhtml">
@@ -8,7 +8,7 @@
   <path id="p" stroke="navy" stroke-width="2" fill="none" pointer-events="none"/>
 
   <script>
-    var r = document.getElementById('r'),
+    var r = document.getElementById('target'),
         p = document.getElementById('p'),
 				signaturePath = '',
         isDown = false;
@@ -44,9 +44,6 @@
 
     function up(e) {
       isDown = false; 
-
-      if (isTouchEvent(e)) e.preventDefault();
-			dataField.val(getSignature());
     }
 
     r.addEventListener('mousedown', down, false);
@@ -75,6 +72,10 @@
     function setText(s) {
 		txt.innerHTML = s;
 	}
+
+    function clearText() {
+        txt.innerHTML = '';
+    }
 
   </script>
 </svg>

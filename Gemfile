@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.13'
+gem 'rails', '3.2.17'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -52,6 +52,7 @@ gem "jquery-datatables-rails"
 gem "mysql2"
 gem "sqlite3"
 gem "thin"
+gem 'font-awesome-rails'
 
 gem 'simple_form'
 gem 'private_pub'
