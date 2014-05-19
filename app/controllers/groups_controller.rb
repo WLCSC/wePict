@@ -107,6 +107,8 @@ class GroupsController < ApplicationController
             m.delete
         end
 
+
+
         flash[:info] = "Reset group."
         redirect_to @group
 	end

@@ -249,7 +249,7 @@ $('body').on("click", '.checkthing', function() {
         <h2>Submit a Question</h2>
 
         <%= form_tag submit_room_path, :remote => true do %>
-            <%= text_area_tag :content %>
+            <%= text_area_tag :qcontent %>
             <%= submit_tag "Submit Question", :class => 'btn btn-large btn-success' %>
         <% end %>
     <% end %>

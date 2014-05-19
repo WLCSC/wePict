@@ -239,6 +239,6 @@ class RoomsController < ApplicationController
     def submit
         @room = Room.find(params[:id])
         @bank = @room.submission_target
-        @q = @bank.questions.create(:content => params[:content], :sequence => 0)
+        @q = @bank.questions.create(:content => params[:qcontent], :sequence => 0)
     end
 end

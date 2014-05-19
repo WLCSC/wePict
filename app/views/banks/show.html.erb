@@ -28,4 +28,4 @@
 <%= link_to "Back to Bank List", user_banks_path(current_user), :class => 'btn' %>
 <%= link_to "Back to Room", @room, :class => 'btn' %>
 <%= link_to 'Edit', edit_user_bank_path(current_user, @bank), :class => 'btn' %>
-<% if @bank.questions.count == 0 %><%= link_to 'Delete', [current_user, @bank], :method => 'delete', :class => 'btn btn-danger' %><% end %>
+<%= link_to 'Remove This Bank', [current_user, @bank], :method => 'delete', :class => 'btn btn-danger' %>

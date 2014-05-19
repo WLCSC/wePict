@@ -1,5 +1,6 @@
 $("#flashbox").append('<div class="alert alert-info"><button type="button" class="close" data-dismiss="alert">&times;</button><%= @q.errors.count == 0 ? "Your question has been submitted." : @q.errors.full_messages.join(', ') %></div>');
 
+$('#qcontent').val("");
 setTimeout(function(){
 	$('#flashbox  .alert').hide('fast', function(){ $target.remove(); });
 }, 5000);
