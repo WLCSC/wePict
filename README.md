@@ -1,7 +1,7 @@
 WePict
 =========
 
-WePict is a classroom response system of sorts that allows students to submit drawings & have them displayed to the classroom.
+WePict is a classroom response system that allows students to submit drawings and have them displayed to the classroom.
 
 How-To
 ------
