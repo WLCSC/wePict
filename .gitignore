@@ -1,1 +1,4 @@
 .meteor/meteorite
+
+# Do not commit the secret file.
+server/secret.js
