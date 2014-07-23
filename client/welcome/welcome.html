@@ -1,0 +1,9 @@
+<template name="welcome">
+	{{#if currentUser}}
+		<div class="alert">You don't belong to any rooms yet.</div>
+	{{else}}
+		<div class="margin: auto; width: 260px; text-align: center">
+			{{> loginForm}}
+		</div>
+	{{/if}}
+</template>
