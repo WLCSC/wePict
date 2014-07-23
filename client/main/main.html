@@ -22,15 +22,15 @@
 		<div class="row">
 			<div class="col-md-10 col-md-offset-1">
 				<div class="well main">
-					<div class="btn-toolbar">
-						<!-- Add back the other stuff.
-						Not login buttons, though. -->
-						<p>Hey!</p>
-						<div class="btn-group">
+					{{#if currentUser}}
+						<div class="btn-toolbar">
+							<div class="btn-group">
+								<input type="button" class="btn btn-warning" value="Log Out" />
+							</div>
+							<div class="btn-group">
+							</div>
 						</div>
-						<div class="btn-group">
-						</div>
-					</div>
+					{{/if}}
 					<div id="flashbox"></div>
 				</div>
 			</div>
