@@ -2,7 +2,10 @@ Template.loginForm.events({
 	"submit #login-form": function(event, template) {
 		event.preventDefault();
 		
-		Meteor.loginWithGoogle(function (error) {
+		Meteor.loginWithGoogle({
+			requestPermissions: ["email",
+								 "https://www.googleapis.com/auth/groups"]
+		}, function (error) {
 			if (error)
 				alert(error);
 		});
