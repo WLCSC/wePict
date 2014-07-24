@@ -10,3 +10,4 @@ less
 bootstrap3-less
 accounts-google
 service-configuration
+iron-router
