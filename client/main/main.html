@@ -1,51 +1,51 @@
-<head>
-	<title>wePict</title>
-</head>
+<template name="main">
+	{{setTitle "wePict"}}
 
-<body>
-	<div class="navbar navbar-fixed-top navbar-inverse">
-		<div class="navbar-inner">
-			<div class="container">
-				<a href="#" class="brand">
-					<span class="bb-red">W</span>
-					<span class="bb-orange">e</span>
-					<span class="bb-yellow">P</span>
-					<span class="bb-green">i</span>
-					<span class="bb-blue">c</span>
-					<span class="bb-violet">t</span>
-				</a>
-			</div>
-		</div>
-	</div>
-	
-	<div class="container">
-		<div class="row">
-			<div class="col-md-10 col-md-offset-1">
-				<div class="well main">
-					{{#if currentUser}}
-						<div class="btn-toolbar">
-							<div class="btn-group">
-								<input type="button" class="btn btn-warning" value="Log Out" />
-							</div>
-							<div class="btn-group">
-							</div>
-						</div>
-					{{/if}}
-					<div id="flashbox"></div>
-					{{> welcome}}
+	<body>
+		<div class="navbar navbar-fixed-top navbar-inverse">
+			<div class="navbar-inner">
+				<div class="container">
+					<a href="#" class="brand">
+						<span class="bb-red">W</span>
+						<span class="bb-orange">e</span>
+						<span class="bb-yellow">P</span>
+						<span class="bb-green">i</span>
+						<span class="bb-blue">c</span>
+						<span class="bb-violet">t</span>
+					</a>
 				</div>
 			</div>
-		</div><!--/row-->
+		</div>
 		
-		<a href="https://github.com/WLCSC/wePict" class="pull-right"><img alt="GitHub-icon" src="GitHub-Mark-Light-120px-plus.png"></a>
-		<footer>
-			<p>
-				Created by Brad Thompson, WLCSC Technology Department
-				<br />
-				Rewritten by Sam Craig (class of 2017) and Sam Mercier (class of 2016)
-				<br />
-				Inspired by Leo Leffert
-			</p>
-		</footer>
-	</div>
-</body>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-10 col-md-offset-1">
+					<div class="well main">
+						{{#if currentUser}}
+							<div class="btn-toolbar">
+								<div class="btn-group">
+									<input type="button" class="btn btn-warning" value="Log Out" />
+								</div>
+								<div class="btn-group">
+								</div>
+							</div>
+						{{/if}}
+						<div id="flashbox"></div>
+						{{> yield}}
+					</div>
+				</div>
+			</div><!--/row-->
+			
+			<a href="https://github.com/WLCSC/wePict" class="pull-right"><img alt="GitHub-icon" src="GitHub-Mark-Light-120px-plus.png"></a>
+			<footer>
+				<p>
+					Created by Brad Thompson, WLCSC Technology Department
+					<br />
+					Rewritten by Sam Craig (class of 2017) and Sam Mercier (class of 2016)
+					<br />
+					Inspired by Leo Leffert
+				</p>
+			</footer>
+		</div>
+	</body>
+</template>
