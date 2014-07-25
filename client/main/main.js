@@ -12,4 +12,4 @@ Ember.ObjectController.extend({
 	isAdmin: (function() {
 		return Meteor.call("isAdmin");
 	}).property()
-})
+});
