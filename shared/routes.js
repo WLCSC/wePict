@@ -5,4 +5,5 @@ Router.configure({
 
 Router.map(function() {
 	this.route("welcome", {path: "/"});
+	this.route("loginButton", {path: "/login"});
 });
