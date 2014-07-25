@@ -8,6 +8,8 @@ Handlebars.registerHelper("setTitle", function() {
 	document.title = title;
 });
 
-Handlebars.registerHelper("isAdmin", function() {
-	return Meteor.call("isAdmin");
-});
+Ember.ObjectController.extend({
+	isAdmin: (function() {
+		return Meteor.call("isAdmin");
+	}).property()
+})
