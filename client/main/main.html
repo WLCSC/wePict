@@ -26,9 +26,14 @@
 								<div class="btn-group">
 									{{> logoutButton}}
 									<a href="{{pathFor 'welcome'}}" class="btn btn-primary">Home</a>
+									<a class="btn btn-success">All Rooms</a>
 								</div>
-								<div class="btn-group">
-								</div>
+								{{#if isAdmin}}
+									<div class="btn-group">
+										<a class="btn">Users</a>
+										<a class="btn">Groups</a>
+									</div>
+								{{\if}}
 							</div>
 						{{/if}}
 						<div id="flashbox"></div>
