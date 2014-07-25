@@ -1,5 +1,5 @@
-Template.loginForm.events({
-	"submit #login-form": function(event, template) {
+Template.loginButton.events({
+	"click": function(event, template) {
 		event.preventDefault();
 		
 		Meteor.loginWithGoogle({
@@ -12,8 +12,8 @@ Template.loginForm.events({
 	}
 });
 
-Template.logoutForm.events({
-	"submit #logout-form": function(event, template) {
+Template.logoutButton.events({
+	"click": function(event, template) {
 		event.preventDefault();
 
 		Meteor.logout(function(error) {
