@@ -6,7 +6,7 @@
 
 .gridwell > .box {
 	height: 18px;
-	
+
 }
 
 .bb-red 				{ color: #ff0000; }
@@ -18,8 +18,18 @@
 
 .brand {
 	font-family: 'Permanent Marker', cursive;
+	font-size: 48px;
 	float: none !important;
+
 }
+.brand:hover {
+   	text-decoration: none;
+}
+
+.brand:active {
+   	 text-decoration: none;
+}
+
 
 body {
 	padding-top: 60px;
@@ -27,9 +37,25 @@ body {
 }
 
 footer {
-	text-align: right;
+	text-align: center;
 	color: #555;
 }
+
+footer img {
+	height: 40px;
+	width: auto;
+	border: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	opacity: 0.6;
+    filter: alpha(opacity=60); /* For IE8 and earlier */
+}
+
+footer img:hover {
+	opacity: 1.0;
+    filter: alpha(opacity=100); /* For IE8 and earlier */
+}
+
 
 .navbar .nav,
 .navbar .nav > li {
@@ -143,7 +169,7 @@ footer {
 	iframe {
 		border: thin solid #bbb;
 	}
-}	
+}
 
 #curtain {
 	position: absolute;
