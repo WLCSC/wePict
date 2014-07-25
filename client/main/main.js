@@ -7,3 +7,9 @@ Handlebars.registerHelper("setTitle", function() {
 	
 	document.title = title;
 });
+
+Ember.ObjectController.extend({
+	isAdmin: (function() {
+		return Meteor.call("isAdmin");
+	}).property()
+});
