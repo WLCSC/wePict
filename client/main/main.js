@@ -3,3 +3,9 @@ UI.registerHelper("setTitle", function(title) {
 	
 	document.title = title;
 });
+
+Ember.ObjectController.extend({
+	isAdmin: (function() {
+		return Meteor.call("isAdmin");
+	}).property()
+});
