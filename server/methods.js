@@ -6,6 +6,14 @@ Meteor.methods({
 			return null;
 		}
 	},
+
+	getEmail: function() {
+		try {
+			return Meteor.user().services.google.email;
+		} catch (e) {
+			return null;
+		}
+	},
 	
 	isAdmin: function() {
 		this.unblock();
@@ -13,15 +21,12 @@ Meteor.methods({
 		try {
 			var result_data = HTTP.get("https://www.googleapis.com/admin/directory/v1/groups", {
 				headers: {
-					"Authorization": "Bearer " + Meteor.call('getAccessToken')
+					"Authorization": "Bearer " + Meteor.call("getAccessToken")
 				},
 				params: {
-					domain: "wl.k12.in.us",
-					customer: "my_customer"
+					userKey: Meteor.call("getEmail")
 				}
 			}).data;
-
-			console.log(result_data);
 
 			for (var i = 0; i < result_data.groups.length; i++)
 				if (result_data.groups[i].email == "TechnologyStaff@wl.k12.in.us")
@@ -29,7 +34,6 @@ Meteor.methods({
 
 			return false;
 		} catch (e) {
-			console.log(e);
 			return false;
 		}
 	}
