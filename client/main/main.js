@@ -4,8 +4,13 @@ UI.registerHelper("setTitle", function(title) {
 	document.title = title;
 });
 
-Ember.ObjectController.extend({
-	isAdmin: (function() {
-		return Meteor.call("isAdmin");
-	}).property()
+Meteor.call("isAdmin", function(error, result) {
+	if (error)
+		Session.set("admin", false);
+	else
+		Session.set("admin", result);
+});
+
+UI.registerHelper("isAdmin", function() {
+	return Session.get("admin");
 });
