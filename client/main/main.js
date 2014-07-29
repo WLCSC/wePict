@@ -5,10 +5,7 @@ UI.registerHelper("setTitle", function(title) {
 });
 
 Meteor.call("isAdmin", function(error, result) {
-	if (error)
-		Session.set("admin", false);
-	else
-		Session.set("admin", result);
+	Session.set("admin", error ? false : result);
 });
 
 UI.registerHelper("isAdmin", function() {
