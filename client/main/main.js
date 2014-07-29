@@ -4,8 +4,6 @@ UI.registerHelper("setTitle", function(title) {
 	document.title = title;
 });
 
-// The string that is used for admin in the session should ideally
-// change on a daily basis to keep the enduser from knowing it.
 Meteor.call("isAdmin", function(error, result) {
 	if (error)
 		Session.set("admin", false);
