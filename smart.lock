@@ -4,8 +4,7 @@
     "basePackages": {
       "bootstrap3-less": {},
       "iron-router": {},
-      "font-awesome": {},
-      "handlebars-server": {}
+      "font-awesome": {}
     },
     "packages": {
       "bootstrap3-less": {
@@ -22,11 +21,6 @@
         "git": "https://github.com/nate-strauser/meteor-font-awesome.git",
         "tag": "v4.1.0",
         "commit": "ce6b1e92715d1938babc5d69c655c17e387f5926"
-      },
-      "handlebars-server": {
-        "git": "https://github.com/EventedMind/meteor-handlebars-server.git",
-        "tag": "v1.2.0",
-        "commit": "1b72c4e9d82af66293e50be4516c487d15d97464"
       },
       "iron-layout": {
         "git": "https://github.com/EventedMind/iron-layout.git",
