@@ -39,8 +39,6 @@ Meteor.methods({
 	},
 
 	render: function(template) {
-		return Handlebars.templates["adminMainButtons"]({
-			isAdmin: Meteor.call("isAdmin")
-		});
+		return Spacebars.compile(template);
 	}
 });
