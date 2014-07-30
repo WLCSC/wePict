@@ -4,10 +4,12 @@ UI.registerHelper("setTitle", function(title) {
 	document.title = title;
 });
 
-Meteor.call("render", "adminMainButtons", function(error, result) {
-	Session.set("adminMainButtons", error ? "" : result);
-});
-
-UI.registerHelper("adminMainButtons", function() {
-	return Session.get("adminMainButtons");
+UI.registerHelper("render", function(file) {
+	if (Session.get("render_" + file)) {
+		return Session.get("render_" + file);
+	} else {
+		Meteor.call("render", file, function(error, result) {
+			Session.set("render_" + file, error ? "" : result);
+		});
+	}
 });
