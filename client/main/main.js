@@ -4,10 +4,10 @@ UI.registerHelper("setTitle", function(title) {
 	document.title = title;
 });
 
-Meteor.call("isAdmin", function(error, result) {
-	Session.set("admin", error ? false : result);
+Meteor.call("render", "adminMainButtons", function(error, result) {
+	Session.set("adminMainButtons", error ? "" : result);
 });
 
-UI.registerHelper("isAdmin", function() {
-	return Session.get("admin");
+UI.registerHelper("adminMainButtons", function() {
+	return Session.get("adminMainButtons");
 });

@@ -2,7 +2,6 @@
   "packages": {
     "bootstrap3-less": {},
     "iron-router": {},
-    "font-awesome": {},
-    "handlebars-server": {}
+    "font-awesome": {}
   }
 }

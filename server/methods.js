@@ -36,5 +36,11 @@ Meteor.methods({
 		} catch (e) {
 			return false;
 		}
+	},
+
+	render: function(template) {
+		return Handlebars.templates["adminMainButtons"]({
+			isAdmin: Meteor.call("isAdmin")
+		});
 	}
 });

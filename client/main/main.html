@@ -28,12 +28,7 @@
 									<a href="{{pathFor 'welcome'}}" class="btn btn-primary">Home</a>
 									<a class="btn btn-success">All Rooms</a>
 								</div>
-								{{#if isAdmin}}
-									<div class="btn-group">
-										<a class="btn btn-default">Users</a>
-										<a class="btn btn-default">Groups</a>
-									</div>
-								{{/if}}
+								{{adminMainButtons}}
 							</div>
 						{{/if}}
 						<div id="flashbox"></div>
