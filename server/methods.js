@@ -48,6 +48,6 @@ Meteor.methods({
 		if (file.indexOf("admin/") != -1 && !Meteor.call("isAdmin"))
 			canReturn = false;
 		
-		return canReturn ? new Spacebars.SafeString(Assets.getText(file)) : "";
+		return canReturn ? Assets.getText(file + ".html") : "";
 	}
 });
