@@ -1,6 +1,6 @@
 <template name="welcome">
 	{{#if currentUser}}
-		<div class="alert">You don't belong to any rooms yet.</div>
+		{{> dashboard}}
 	{{else}}
 		<div class="margin: auto; width: 260px; text-align: center">
 			<p>Please log in.</p>
@@ -8,4 +8,8 @@
 			{{> loginButtons}}
 		</div>
 	{{/if}}
+</template>
+
+<template name="dashboard">
+	<div class="alert">You don't belong to any rooms yet.
 </template>
