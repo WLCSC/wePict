@@ -2,7 +2,6 @@
   "packages": {
     "bootstrap3-less": {},
     "iron-router": {},
-    "font-awesome": {},
-    "accounts-ui-bootstrap-3": {}
+    "font-awesome": {}
   }
 }
