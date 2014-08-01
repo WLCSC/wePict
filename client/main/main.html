@@ -22,9 +22,13 @@
 				<div class="col-md-10 col-md-offset-1">
 					<div class="well main">
 						{{#if currentUser}}
+							<p>
+								You are currently signed in as
+								{{> loginButtons}}
+							</p>
+							
 							<div class="btn-toolbar" role="toolbar">
 								<div class="btn-group">
-									{{> logoutButton}}
 									<a href="{{pathFor 'welcome'}}" class="btn btn-primary">Home</a>
 									<a class="btn btn-success">All Rooms</a>
 								</div>
