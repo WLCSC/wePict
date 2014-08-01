@@ -4,8 +4,9 @@ Template.loginButton.events({
 		
 		Meteor.loginWithGoogle({
 			requestPermissions: ["email",
-								 "https://www.googleapis.com/auth/admin.directory.group.readonly",
-								 "https://www.googleapis.com/auth/admin.directory.user.readonly"]
+			                     "https://www.googleapis.com/auth/admin.directory.group.readonly",
+			                     "https://www.googleapis.com/auth/admin.directory.user.readonly"],
+			requestOfflineToken: true
 		}, function (error) {
 			if (error)
 				alert(error);
