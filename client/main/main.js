@@ -14,9 +14,10 @@ UI.registerHelper("isAdmin", function() {
 
 Accounts.ui.config({
 	requestPermissions: {
-		google: ["email",
-		         "https://www.googleapis.com/auth/admin.directory.group.readonly",
-		         "https://www.googleapis.com/auth/admin.directory.user.readonly"]
+		google: ["openid",
+		         "email",
+		         "https://www.googleapis.com/auth/admin.directory.group",
+		         "https://www.googleapis.com/auth/admin.directory.user"]
 	},
 	requestOfflineToken: {
 		google: true
