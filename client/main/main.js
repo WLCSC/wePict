@@ -11,3 +11,14 @@ Meteor.call("isAdmin", function(error, result) {
 UI.registerHelper("isAdmin", function() {
 	return Session.get("admin");
 });
+
+Accounts.ui.config({
+	requestPermissions: {
+		google: ["email",
+		         "https://www.googleapis.com/auth/admin.directory.group.readonly",
+		         "https://www.googleapis.com/auth/admin.directory.user.readonly"]
+	},
+	requestOfflineToken: {
+		google: true
+	}
+});
