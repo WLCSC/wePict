@@ -4,7 +4,8 @@
     "basePackages": {
       "bootstrap3-less": {},
       "iron-router": {},
-      "font-awesome": {}
+      "font-awesome": {},
+      "accounts-ui-bootstrap-3": {}
     },
     "packages": {
       "bootstrap3-less": {
@@ -21,6 +22,11 @@
         "git": "https://github.com/nate-strauser/meteor-font-awesome.git",
         "tag": "v4.1.0",
         "commit": "ce6b1e92715d1938babc5d69c655c17e387f5926"
+      },
+      "accounts-ui-bootstrap-3": {
+        "git": "https://github.com/mangasocial/meteor-accounts-ui-bootstrap-3.git",
+        "tag": "v0.3.3",
+        "commit": "2e50b605d8d5ed68e48c4529a65f13552d8af3f9"
       },
       "iron-layout": {
         "git": "https://github.com/EventedMind/iron-layout.git",
