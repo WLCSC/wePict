@@ -24,7 +24,7 @@ Meteor.methods({
 					"Authorization": "Bearer " + Meteor.call("getAccessToken")
 				},
 				params: {
-					userKey: Meteor.call("getEmail")
+					userKey: Meteor.user().services.google.id
 				}
 			}).data;
 
