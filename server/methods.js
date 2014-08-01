@@ -36,18 +36,5 @@ Meteor.methods({
 		} catch (e) {
 			return false;
 		}
-	},
-
-	render: function(file) {
-		var canReturn = true;
-
-		/*
-		 * If this is an admin view (in the admin/ directory of private)
-		 * and the user is not an admin, do not let them access it.
-		 */
-		if (file.indexOf("admin/") != -1 && !Meteor.call("isAdmin"))
-			canReturn = false;
-		
-		return canReturn ? Assets.getText(file + ".html") : "";
 	}
 });
