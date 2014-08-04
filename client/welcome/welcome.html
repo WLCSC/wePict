@@ -5,7 +5,7 @@
 		<div class="margin: auto; width: 260px; text-align: center">
 			<p>Please log in.</p>
 
-			{{> loginButtonCustom}}
+			{{> loginButton}}
 
 		</div>
 	{{/if}}
@@ -13,16 +13,4 @@
 
 <template name="dashboard">
 	<div class="alert">You don't belong to any rooms yet.</div>
-</template>
-
-<template name="loginButtonCustom">
-	<button type="button" class="btn btn-default">
-		<img style="height: 18px;  width:18px; margin-right: 2px;" src="google-favicon.png">
-		Login
-	</button>
-</template>
-<template name="logoutButtonCustom">
-	<button type="button" class="btn btn-default">
-		Log Out
-	</button>
 </template>
