@@ -22,14 +22,9 @@
 				<div class="col-md-10 col-md-offset-1">
 					<div class="well main">
 						{{#if currentUser}}
-						    <div style="position:absolute; right:35px; top:20px;">
-								<p>
-									{{> logoutButton}}
-								</p>
-							</div>
-
-							<div class="btn-toolbar" role="toolbar">
+						    <div class="btn-toolbar" role="toolbar">
 								<div class="btn-group">
+									{{> logoutButton}}
 									<a href="{{pathFor 'welcome'}}" class="btn btn-primary">Home</a>
 									<a class="btn btn-success">All Rooms</a>
 								</div>
